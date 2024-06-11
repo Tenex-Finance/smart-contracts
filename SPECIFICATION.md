@@ -209,7 +209,7 @@ Voting rewards are rewards that accrue to users that vote for a specific pool. T
 
 ### FeesVotingReward
 
-The fee voting reward derives from the fees relinquished by LP depositors 
+The fee voting reward derives from the fees `(the fees which is accumulated by swaps or any trade in that Pool)` relinquished by LP depositors 
 depositing their LP token in to the gauge. These fees are synchronized with bribes
 and accrue in the same way. Thus, fees that accrue during epoch `n` will be 
 distributed to voters of that pool in epoch `n+1`.
