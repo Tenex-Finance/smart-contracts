@@ -1,0 +1,100 @@
+decoded input	{
+	"uint256 amountOutMin": "5",
+	"tuple[] routes": [
+		[
+			"0x5FD6eB55D12E759a21C09eF703fe0CBa1DC9d88D",
+			"0x7b96aF9Bd211cBf6BA5b0dd53aa61Dc5806b6AcE",
+			false,
+			"0xDA0bab807633f07f013f94DD0E6A4F96F8742B53"
+		]
+	],
+	"address to": "0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2",
+	"uint256 deadline": "1718188901"
+}
+decoded output	{
+	"0": "uint256[]: amounts 250000000000000000,33"
+}
+logs	[
+	{
+		"from": "0x5FD6eB55D12E759a21C09eF703fe0CBa1DC9d88D",
+		"topic": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+		"event": "Transfer",
+		"args": {
+			"0": "0x3328358128832A260C76A4141e19E2A943CD4B6D",
+			"1": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+			"2": "250000000000000000",
+			"from": "0x3328358128832A260C76A4141e19E2A943CD4B6D",
+			"to": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+			"value": "250000000000000000"
+		}
+	},
+	{
+		"from": "0x7b96aF9Bd211cBf6BA5b0dd53aa61Dc5806b6AcE",
+		"topic": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+		"event": "Transfer",
+		"args": {
+			"0": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+			"1": "0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2",
+			"2": "33",
+			"from": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+			"to": "0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2",
+			"value": "33"
+		}
+	},
+	{
+		"from": "0x5FD6eB55D12E759a21C09eF703fe0CBa1DC9d88D",
+		"topic": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+		"event": "Transfer",
+		"args": {
+			"0": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+			"1": "0x8e1AE2ff751817757F800943D9F3E5e4f9A9b48E",
+			"2": "750000000000000",
+			"from": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+			"to": "0x8e1AE2ff751817757F800943D9F3E5e4f9A9b48E",
+			"value": "750000000000000"
+		}
+	},
+	{
+		"from": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+		"topic": "0x112c256902bf554b6ed882d2936687aaeb4225e8cd5b51303c90ca6cf43a8602",
+		"event": "Fees",
+		"args": {
+			"0": "0x3328358128832A260C76A4141e19E2A943CD4B6D",
+			"1": "750000000000000",
+			"2": "0",
+			"sender": "0x3328358128832A260C76A4141e19E2A943CD4B6D",
+			"amount0": "750000000000000",
+			"amount1": "0"
+		}
+	},
+	{
+		"from": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+		"topic": "0xcf2aa50876cdfbb541206f89af0ee78d44a2abf8d328e37fa4917f982149848a",
+		"event": "Sync",
+		"args": {
+			"0": "749250000000000000",
+			"1": "67",
+			"reserve0": "749250000000000000",
+			"reserve1": "67"
+		}
+	},
+	{
+		"from": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+		"topic": "0xb3e2773606abfd36b5bd91394b3a54d1398336c65005baf7bf7a05efeffaf75b",
+		"event": "Swap",
+		"args": {
+			"0": "0x3328358128832A260C76A4141e19E2A943CD4B6D",
+			"1": "0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2",
+			"2": "250000000000000000",
+			"3": "0",
+			"4": "0",
+			"5": "33",
+			"sender": "0x3328358128832A260C76A4141e19E2A943CD4B6D",
+			"to": "0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2",
+			"amount0In": "250000000000000000",
+			"amount1In": "0",
+			"amount0Out": "0",
+			"amount1Out": "33"
+		}
+	}
+]

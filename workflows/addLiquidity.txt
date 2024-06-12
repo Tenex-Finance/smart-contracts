@@ -1,0 +1,125 @@
+
+[vm]
+from: 0x5B3...eddC4
+to: Router.addLiquidityETH(address,bool,uint256,uint256,uint256,address,uint256) 0x332...D4B6D
+value: 500000000000000000 wei
+data: 0xb7e...96ba3
+logs: 7
+hash: 0x626...7071c
+status	0x1 Transaction mined and execution succeed
+transaction hash	0x626df5f141ebc8b68d2ad7a5f7e0507e4f562477f3dadfd0650f29574d07071c
+block hash	0xb050642afded19964382e2f0a4b365e4ce8eb1ab7fe8fdb77116b6ffd251ef59
+block number	25
+from	0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
+to	Router.addLiquidityETH(address,bool,uint256,uint256,uint256,address,uint256) 0x3328358128832A260C76A4141e19E2A943CD4B6D
+gas	486996 gas
+transaction cost	374074 gas 
+execution cost	376190 gas 
+input	0xb7e...96ba3
+decoded input	{
+	"address token": "0x7b96aF9Bd211cBf6BA5b0dd53aa61Dc5806b6AcE",
+	"bool stable": false,
+	"uint256 amountTokenDesired": "100",
+	"uint256 amountTokenMin": "90",
+	"uint256 amountETHMin": "500000000000000000",
+	"address to": "0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2",
+	"uint256 deadline": "1718184867"
+}
+decoded output	{
+	"0": "uint256: amountToken 100",
+	"1": "uint256: amountETH 500000000000000000",
+	"2": "uint256: liquidity 7071066811"
+}
+logs	[
+	{
+		"from": "0x7b96aF9Bd211cBf6BA5b0dd53aa61Dc5806b6AcE",
+		"topic": "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925",
+		"event": "Approval",
+		"args": {
+			"0": "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
+			"1": "0x3328358128832A260C76A4141e19E2A943CD4B6D",
+			"2": "0",
+			"owner": "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
+			"spender": "0x3328358128832A260C76A4141e19E2A943CD4B6D",
+			"value": "0"
+		}
+	},
+	{
+		"from": "0x7b96aF9Bd211cBf6BA5b0dd53aa61Dc5806b6AcE",
+		"topic": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+		"event": "Transfer",
+		"args": {
+			"0": "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
+			"1": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+			"2": "100",
+			"from": "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
+			"to": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+			"value": "100"
+		}
+	},
+	{
+		"from": "0x5FD6eB55D12E759a21C09eF703fe0CBa1DC9d88D",
+		"topic": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+		"event": "Transfer",
+		"args": {
+			"0": "0x3328358128832A260C76A4141e19E2A943CD4B6D",
+			"1": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+			"2": "500000000000000000",
+			"from": "0x3328358128832A260C76A4141e19E2A943CD4B6D",
+			"to": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+			"value": "500000000000000000"
+		}
+	},
+	{
+		"from": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+		"topic": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+		"event": "Transfer",
+		"args": {
+			"0": "0x0000000000000000000000000000000000000000",
+			"1": "0x0000000000000000000000000000000000000001",
+			"2": "1000",
+			"from": "0x0000000000000000000000000000000000000000",
+			"to": "0x0000000000000000000000000000000000000001",
+			"value": "1000"
+		}
+	},
+	{
+		"from": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+		"topic": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+		"event": "Transfer",
+		"args": {
+			"0": "0x0000000000000000000000000000000000000000",
+			"1": "0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2",
+			"2": "7071066811",
+			"from": "0x0000000000000000000000000000000000000000",
+			"to": "0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2",
+			"value": "7071066811"
+		}
+	},
+	{
+		"from": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+		"topic": "0xcf2aa50876cdfbb541206f89af0ee78d44a2abf8d328e37fa4917f982149848a",
+		"event": "Sync",
+		"args": {
+			"0": "500000000000000000",
+			"1": "100",
+			"reserve0": "500000000000000000",
+			"reserve1": "100"
+		}
+	},
+	{
+		"from": "0x697490d1CE19afF03A1E52F7088260DfD278eA2f",
+		"topic": "0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f",
+		"event": "Mint",
+		"args": {
+			"0": "0x3328358128832A260C76A4141e19E2A943CD4B6D",
+			"1": "500000000000000000",
+			"2": "100",
+			"sender": "0x3328358128832A260C76A4141e19E2A943CD4B6D",
+			"amount0": "500000000000000000",
+			"amount1": "100"
+		}
+	}
+]
+
+[["0x5FD6eB55D12E759a21C09eF703fe0CBa1DC9d88D", "0x7b96aF9Bd211cBf6BA5b0dd53aa61Dc5806b6AcE",false, "0xDA0bab807633f07f013f94DD0E6A4F96F8742B53"]]
