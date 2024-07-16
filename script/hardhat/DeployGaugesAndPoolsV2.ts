@@ -1,6 +1,6 @@
 import { getContractAt } from "./utils/helpers";
 import { PoolFactory, Voter } from "../../artifacts/types";
-import jsonConstants from "../constants/Optimism.json";
+import jsonConstants from "../constants/Blast.json";
 import deployedContracts from "../constants/output/VelodromeV2Output.json";
 
 async function main() {

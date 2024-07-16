@@ -3,6 +3,7 @@ pragma solidity 0.8.19;
 
 import "forge-std/StdJson.sol";
 import "../test/Base.sol";
+import "forge-std/console.sol";
 
 contract DeployVelodromeV2 is Base {
     using stdJson for string;
@@ -10,7 +11,9 @@ contract DeployVelodromeV2 is Base {
     string public path;
 
     uint256 public deployPrivateKey = vm.envUint("PRIVATE_KEY_DEPLOY");
+
     address public deployerAddress = vm.addr(deployPrivateKey);
+    
     string public constantsFilename = vm.envString("CONSTANTS_FILENAME");
     string public outputFilename = vm.envString("OUTPUT_FILENAME");
     string public jsonConstants;
@@ -36,9 +39,13 @@ contract DeployVelodromeV2 is Base {
     }
 
     function run() public {
+        console.log("check--");
+        console.log(deployerAddress,deployPrivateKey);
         _deploySetupBefore();
         _coreSetup();
         _deploySetupAfter();
+
+
     }
 
     function _deploySetupBefore() public {

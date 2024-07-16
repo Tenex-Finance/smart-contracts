@@ -23,3 +23,6 @@ The contracts that were deployed will be saved in `script/constants/output/Velod
 3. Deploy Governors. You will need to set the governors manually in tenderly.
 
 `npx hardhat run script/hardhat/DeployGovernors.ts --network tenderly`
+
+Governor deployed to: 0x3Ca6377f7003193cC5B3797C3Bc411C858C7D8B0
+EpochGovernor deployed to: 0x45B7275b7B53A817F23f098BD888c9a2B41Ab9e7

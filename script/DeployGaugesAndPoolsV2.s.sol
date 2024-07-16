@@ -3,6 +3,7 @@ pragma solidity 0.8.19;
 
 import "forge-std/StdJson.sol";
 import "../test/Base.sol";
+import "forge-std/console.sol";
 
 /// @notice Deploy script to deploy new pools and gauges for v2
 contract DeployGaugesAndPoolsV2 is Script {
@@ -56,7 +57,9 @@ contract DeployGaugesAndPoolsV2 is Script {
 
         // Deploy all non-VELO pools & gauges
         for (uint256 i = 0; i < pools.length; i++) {
+            console.log("runing---->");
             address newPool = factory.createPool(pools[i].tokenA, pools[i].tokenB, pools[i].stable);
+            console.log(newPool);
             address newGauge = voter.createGauge(address(factory), newPool);
 
             poolsV2.push(newPool);

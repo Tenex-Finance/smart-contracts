@@ -32,6 +32,7 @@ import {Forwarder} from "@opengsn/contracts/src/forwarder/Forwarder.sol";
 
 import "forge-std/Script.sol";
 import "forge-std/Test.sol";
+import "forge-std/console.sol";
 
 /// @notice Base contract used for tests and deployment scripts
 abstract contract Base is Script, Test {
@@ -105,7 +106,11 @@ abstract contract Base is Script, Test {
 
     function deployFactories() public {
         implementation = new Pool();
+        console.log("impl--");
+        console.log(address(implementation));
         factory = new PoolFactory(address(implementation));
+
+        console.log(factory.implementation());
 
         votingRewardsFactory = new VotingRewardsFactory();
         gaugeFactory = new GaugeFactory();

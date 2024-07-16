@@ -1,0 +1,31 @@
+{
+    "feeManager": "0x3c5a809e712D30D932b71EdB066FA2EEDEE6Ad58",
+    "allowedManager": "0x3c5a809e712D30D932b71EdB066FA2EEDEE6Ad58",
+    "emergencyCouncil": "0x3c5a809e712D30D932b71EdB066FA2EEDEE6Ad58",
+    "team": "0x3c5a809e712D30D932b71EdB066FA2EEDEE6Ad58",
+    "vetoer": "0x3c5a809e712D30D932b71EdB066FA2EEDEE6Ad58",
+    "WETH": "0x4200000000000000000000000000000000000023",
+    "whitelistTokens": [
+        "0x4200000000000000000000000000000000000022",
+        "0xD88957c98D65E9bee30304290f734847De09B990"
+    ],
+    "poolsV2": [
+        {
+            "stable": false,
+            "tokenA": "0x4200000000000000000000000000000000000022",
+            "tokenB": "0xD88957c98D65E9bee30304290f734847De09B990"
+        }
+    ],
+    "poolsVeloV2": [
+        {
+            "stable": false,
+            "token": "0x4200000000000000000000000000000000000022"
+        }
+    ],
+    
+    "current": {
+        "Forwarder": "",
+        "Minter": "",
+        "VotingEscrow": ""
+    }
+}

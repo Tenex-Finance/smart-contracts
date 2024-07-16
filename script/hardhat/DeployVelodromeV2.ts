@@ -19,7 +19,7 @@ import {
   IERC20,
   VeloForwarder,
 } from "../../artifacts/types";
-import jsonConstants from "../constants/Optimism.json";
+import jsonConstants from "../constants/Blast.json";
 
 interface VelodromeV2Output {
   artProxy: string;
