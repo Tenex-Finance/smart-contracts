@@ -4,7 +4,7 @@ pragma solidity 0.8.19;
 import "forge-std/StdJson.sol";
 import "../test/Base.sol";
 
-contract DeployVelodromeV2 is Base {
+contract DeployTenex is Base {
     using stdJson for string;
     string public basePath;
     string public path;
@@ -52,16 +52,16 @@ contract DeployVelodromeV2 is Base {
 
         // Loading output and use output path to later save deployed contracts
         basePath = string.concat(basePath, "output/");
-        path = string.concat(basePath, "DeployVelodromeV2-");
+        path = string.concat(basePath, "DeployTENEXdromeV2-");
         path = string.concat(path, outputFilename);
 
         // start broadcasting transactions
         vm.startBroadcast(deployerAddress);
 
-        // deploy VELO
-        VELO = new Velo();
+        // deploy TENEX
+        TENEX = new Tenex();
 
-        tokens.push(address(VELO));
+        tokens.push(address(TENEX));
     }
 
     function _deploySetupAfter() public {
@@ -82,7 +82,7 @@ contract DeployVelodromeV2 is Base {
         vm.stopBroadcast();
 
         // write to file
-        vm.writeJson(vm.serializeAddress("v2", "VELO", address(VELO)), path);
+        vm.writeJson(vm.serializeAddress("v2", "TENEX", address(TENEX)), path);
         vm.writeJson(vm.serializeAddress("v2", "VotingEscrow", address(escrow)), path);
         vm.writeJson(vm.serializeAddress("v2", "Forwarder", address(forwarder)), path);
         vm.writeJson(vm.serializeAddress("v2", "ArtProxy", address(artProxy)), path);

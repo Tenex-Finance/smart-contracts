@@ -20,7 +20,7 @@ contract DeployGovernors is Script {
     VotingEscrow public escrow;
     Forwarder public forwarder;
     Minter public minter;
-    VeloGovernor public governor;
+    TenexGovernor public governor;
     EpochGovernor public epochGovernor;
 
     function run() public {
@@ -40,7 +40,7 @@ contract DeployGovernors is Script {
 
         vm.startBroadcast(deployerAddress);
 
-        governor = new VeloGovernor(escrow, IVoter(voter));
+        governor = new TenexGovernor(escrow, IVoter(voter));
         epochGovernor = new EpochGovernor(address(forwarder), escrow, address(minter), IVoter(voter));
 
         governor.setVetoer(vetoer);

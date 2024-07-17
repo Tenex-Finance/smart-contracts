@@ -1,12 +1,12 @@
 import { deploy } from "./utils/helpers";
-import { VeloGovernor, EpochGovernor } from "../../artifacts/types";
+import { TenexGovernor, EpochGovernor } from "../../artifacts/types";
 import jsonConstants from "../constants/Blast.json";
 import deployedContracts from "../constants/output/TenexOutput.json";
 
 
 async function main() {
-  const governor = await deploy<VeloGovernor>(
-    "VeloGovernor",
+  const governor = await deploy<TenexGovernor>(
+    "TenexGovernor",
     undefined,
     deployedContracts.votingEscrow,
     deployedContracts.voter

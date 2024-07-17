@@ -17,7 +17,7 @@ import {
   VeArtProxy,
   VotingEscrow,
   IERC20,
-  VeloForwarder,
+  TenexForwarder,
 } from "../../artifacts/types";
 import jsonConstants from "../constants/Blast.json";
 
@@ -82,7 +82,7 @@ async function main() {
   );
   // ====== end deployFactories() ======
 
-  const forwarder = await deploy<VeloForwarder>("VeloForwarder");
+  const forwarder = await deploy<TenexForwarder>("TenexForwarder");
 
   const balanceLogicLibrary = await deployLibrary("BalanceLogicLibrary");
   const delegationLogicLibrary = await deployLibrary("DelegationLogicLibrary");

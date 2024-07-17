@@ -11,14 +11,14 @@ contract LockedManagedRewardTest is BaseTest {
 
     function _setUp() public override {
         // ve
-        VELO.approve(address(escrow), TOKEN_1);
+        TENEX.approve(address(escrow), TOKEN_1);
         escrow.createLock(TOKEN_1, MAXTIME);
         vm.startPrank(address(owner2));
-        VELO.approve(address(escrow), TOKEN_1);
+        TENEX.approve(address(escrow), TOKEN_1);
         escrow.createLock(TOKEN_1, MAXTIME);
         vm.stopPrank();
         vm.startPrank(address(owner3));
-        VELO.approve(address(escrow), TOKEN_1);
+        TENEX.approve(address(escrow), TOKEN_1);
         escrow.createLock(TOKEN_1, MAXTIME);
         vm.stopPrank();
 
@@ -31,13 +31,13 @@ contract LockedManagedRewardTest is BaseTest {
     function testCannotNotifyRewardIfNotVotingEscrow() public {
         vm.prank(address(owner2));
         vm.expectRevert(IReward.NotVotingEscrow.selector);
-        lockedManagedReward.notifyRewardAmount(address(VELO), 0);
+        lockedManagedReward.notifyRewardAmount(address(TENEX), 0);
     }
 
     function testCannotNotifyRewardWithZeroAmount() public {
         vm.prank(address(escrow));
         vm.expectRevert(IReward.ZeroAmount.selector);
-        lockedManagedReward.notifyRewardAmount(address(VELO), 0);
+        lockedManagedReward.notifyRewardAmount(address(TENEX), 0);
     }
 
     function testCannotNotifyRewardAmountIfNotEscrowToken() public {
@@ -50,36 +50,36 @@ contract LockedManagedRewardTest is BaseTest {
     }
 
     function testNotifyRewardAmount() public {
-        deal(address(VELO), address(escrow), TOKEN_1 * 3);
+        deal(address(TENEX), address(escrow), TOKEN_1 * 3);
 
         vm.prank(address(escrow));
-        VELO.approve(address(lockedManagedReward), TOKEN_1);
-        uint256 pre = VELO.balanceOf(address(escrow));
+        TENEX.approve(address(lockedManagedReward), TOKEN_1);
+        uint256 pre = TENEX.balanceOf(address(escrow));
         vm.prank(address(escrow));
         vm.expectEmit(true, true, true, true, address(lockedManagedReward));
-        emit NotifyReward(address(escrow), address(VELO), 604800, TOKEN_1);
-        lockedManagedReward.notifyRewardAmount(address(VELO), TOKEN_1);
-        uint256 post = VELO.balanceOf(address(escrow));
+        emit NotifyReward(address(escrow), address(TENEX), 604800, TOKEN_1);
+        lockedManagedReward.notifyRewardAmount(address(TENEX), TOKEN_1);
+        uint256 post = TENEX.balanceOf(address(escrow));
 
-        assertEq(lockedManagedReward.isReward(address(VELO)), true);
-        assertEq(lockedManagedReward.tokenRewardsPerEpoch(address(VELO), 604800), TOKEN_1);
+        assertEq(lockedManagedReward.isReward(address(TENEX)), true);
+        assertEq(lockedManagedReward.tokenRewardsPerEpoch(address(TENEX), 604800), TOKEN_1);
         assertEq(pre - post, TOKEN_1);
-        assertEq(VELO.balanceOf(address(lockedManagedReward)), TOKEN_1);
+        assertEq(TENEX.balanceOf(address(lockedManagedReward)), TOKEN_1);
 
         skip(1 hours);
 
         vm.prank(address(escrow));
-        VELO.approve(address(lockedManagedReward), TOKEN_1 * 2);
-        pre = VELO.balanceOf(address(escrow));
+        TENEX.approve(address(lockedManagedReward), TOKEN_1 * 2);
+        pre = TENEX.balanceOf(address(escrow));
         vm.prank(address(escrow));
         vm.expectEmit(true, true, true, true, address(lockedManagedReward));
-        emit NotifyReward(address(escrow), address(VELO), 604800, TOKEN_1 * 2);
-        lockedManagedReward.notifyRewardAmount(address(VELO), TOKEN_1 * 2);
-        post = VELO.balanceOf(address(escrow));
+        emit NotifyReward(address(escrow), address(TENEX), 604800, TOKEN_1 * 2);
+        lockedManagedReward.notifyRewardAmount(address(TENEX), TOKEN_1 * 2);
+        post = TENEX.balanceOf(address(escrow));
 
-        assertEq(lockedManagedReward.tokenRewardsPerEpoch(address(VELO), 604800), TOKEN_1 * 3);
+        assertEq(lockedManagedReward.tokenRewardsPerEpoch(address(TENEX), 604800), TOKEN_1 * 3);
         assertEq(pre - post, TOKEN_1 * 2);
-        assertEq(VELO.balanceOf(address(lockedManagedReward)), TOKEN_1 * 3);
+        assertEq(TENEX.balanceOf(address(lockedManagedReward)), TOKEN_1 * 3);
     }
 
     function testCannotGetRewardIfNotSingleToken() public {
@@ -91,7 +91,7 @@ contract LockedManagedRewardTest is BaseTest {
         skipToNextEpoch(1);
 
         address[] memory rewards = new address[](2);
-        rewards[0] = address(VELO);
+        rewards[0] = address(TENEX);
         rewards[1] = address(WETH);
 
         vm.prank(address(escrow));
@@ -120,7 +120,7 @@ contract LockedManagedRewardTest is BaseTest {
         skipToNextEpoch(1);
 
         address[] memory rewards = new address[](1);
-        rewards[0] = address(VELO);
+        rewards[0] = address(TENEX);
 
         vm.prank(address(owner2));
         vm.expectRevert(IReward.NotVotingEscrow.selector);
@@ -143,9 +143,9 @@ contract LockedManagedRewardTest is BaseTest {
     }
 
     function _addLockedReward(uint256 _amount) internal {
-        deal(address(VELO), address(distributor), _amount);
+        deal(address(TENEX), address(distributor), _amount);
         vm.startPrank(address(distributor));
-        VELO.approve(address(escrow), _amount);
+        TENEX.approve(address(escrow), _amount);
         escrow.depositFor(mTokenId, _amount);
         vm.stopPrank();
     }
