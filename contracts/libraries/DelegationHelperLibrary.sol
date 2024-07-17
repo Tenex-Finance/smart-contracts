@@ -3,7 +3,7 @@ pragma solidity 0.8.19;
 
 import {IVotingEscrow} from "../interfaces/IVotingEscrow.sol";
 import {IReward} from "contracts/interfaces/IReward.sol";
-import {VelodromeTimeLibrary} from "contracts/libraries/VelodromeTimeLibrary.sol";
+import {TenexTimeLibrary} from "contracts/libraries/TenexTimeLibrary.sol";
 import {SafeCastLibrary} from "./SafeCastLibrary.sol";
 import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
 
@@ -60,15 +60,15 @@ library DelegationHelperLibrary {
         address _rewardToken = ve.token();
         uint256 reward = 0;
         uint256 _supply = 1;
-        uint256 _currTs = VelodromeTimeLibrary.epochStart(lmr.lastEarn(_rewardToken, tokenId)); // take epoch last claimed in as starting point
+        uint256 _currTs = TenexTimeLibrary.epochStart(lmr.lastEarn(_rewardToken, tokenId)); // take epoch last claimed in as starting point
         uint256 _index = lmr.getPriorBalanceIndex(tokenId, _currTs);
         (uint256 _cpTs, uint256 _cpBalanceOf) = lmr.checkpoints(tokenId, _index);
 
         // accounts for case where lastEarn is before first checkpoint
-        _currTs = Math.max(_currTs, VelodromeTimeLibrary.epochStart(_cpTs));
+        _currTs = Math.max(_currTs, TenexTimeLibrary.epochStart(_cpTs));
 
         // get epochs between end of the current epoch and first checkpoint in same epoch as last claim
-        uint256 numEpochs = (VelodromeTimeLibrary.epochNext(timepoint) - _currTs) / DURATION;
+        uint256 numEpochs = (TenexTimeLibrary.epochNext(timepoint) - _currTs) / DURATION;
         uint256 _priorSupply;
 
         if (numEpochs > 0) {

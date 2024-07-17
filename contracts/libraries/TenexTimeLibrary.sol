@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity 0.8.19;
 
-library VelodromeTimeLibrary {
+library TenexTimeLibrary {
     uint256 internal constant WEEK = 7 days;
 
     /// @dev Returns start of epoch based on current timestamp

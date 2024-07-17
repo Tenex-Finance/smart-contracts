@@ -11,7 +11,7 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {ERC2771Context} from "@openzeppelin/contracts/metatx/ERC2771Context.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import {VelodromeTimeLibrary} from "../libraries/VelodromeTimeLibrary.sol";
+import {TenexTimeLibrary} from "../libraries/TenexTimeLibrary.sol";
 
 /// @title Velodrome V2 Gauge
 /// @author veldorome.finance, @figs999, @pegahcarter
@@ -213,7 +213,7 @@ contract Gauge is IGauge, ERC2771Context, ReentrancyGuard {
     function _notifyRewardAmount(address sender, uint256 _amount) internal {
         rewardPerTokenStored = rewardPerToken();
         uint256 timestamp = block.timestamp;
-        uint256 timeUntilNext = VelodromeTimeLibrary.epochNext(timestamp) - timestamp;
+        uint256 timeUntilNext = TenexTimeLibrary.epochNext(timestamp) - timestamp;
 
         if (timestamp >= periodFinish) {
             IERC20(rewardToken).safeTransferFrom(sender, address(this), _amount);
@@ -224,7 +224,7 @@ contract Gauge is IGauge, ERC2771Context, ReentrancyGuard {
             IERC20(rewardToken).safeTransferFrom(sender, address(this), _amount);
             rewardRate = (_amount + _leftover) / timeUntilNext;
         }
-        rewardRateByEpoch[VelodromeTimeLibrary.epochStart(timestamp)] = rewardRate;
+        rewardRateByEpoch[TenexTimeLibrary.epochStart(timestamp)] = rewardRate;
         if (rewardRate == 0) revert ZeroRewardRate();
 
         // Ensure the provided reward amount is not more than the balance in the contract.

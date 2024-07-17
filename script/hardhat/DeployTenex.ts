@@ -12,7 +12,6 @@ import {
   Minter,
   RewardsDistributor,
   Router,
-  Velo,
   Tenex,
   Voter,
   VeArtProxy,
