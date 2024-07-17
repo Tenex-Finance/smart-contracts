@@ -26,3 +26,8 @@ The contracts that were deployed will be saved in `script/constants/output/Velod
 
 Governor deployed to: 0x3Ca6377f7003193cC5B3797C3Bc411C858C7D8B0
 EpochGovernor deployed to: 0x45B7275b7B53A817F23f098BD888c9a2B41Ab9e7
+
+Blast Sepolia with tenex :
+
+Governor deployed to: 0x6281658001604C3c5Bed5390e7B218EB543Fe125
+EpochGovernor deployed to: 0xBa5ADeB9ae6098DFB1F8E461276B833E0BbEA3ED

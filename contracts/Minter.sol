@@ -4,7 +4,7 @@ pragma solidity 0.8.19;
 import {Math} from "@openzeppelin/contracts/utils/math/Math.sol";
 import {IMinter} from "./interfaces/IMinter.sol";
 import {IRewardsDistributor} from "./interfaces/IRewardsDistributor.sol";
-import {IVelo} from "./interfaces/IVelo.sol";
+import {ITenex} from "./interfaces/ITenex.sol";
 import {IVoter} from "./interfaces/IVoter.sol";
 import {IVotingEscrow} from "./interfaces/IVotingEscrow.sol";
 import {IEpochGovernor} from "./interfaces/IEpochGovernor.sol";
@@ -14,9 +14,9 @@ import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol
 /// @author velodrome.finance, @figs999, @pegahcarter
 /// @notice Controls minting of emissions and rebases for Velodrome
 contract Minter is IMinter {
-    using SafeERC20 for IVelo;
+    using SafeERC20 for ITenex;
     /// @inheritdoc IMinter
-    IVelo public immutable velo;
+    ITenex public immutable tenex;
     /// @inheritdoc IMinter
     IVoter public immutable voter;
     /// @inheritdoc IMinter
@@ -60,7 +60,7 @@ contract Minter is IMinter {
         address _ve, // the ve(3,3) system that will be locked into
         address _rewardsDistributor // the distribution system that ensures users aren't diluted
     ) {
-        velo = IVelo(IVotingEscrow(_ve).token());
+        tenex = ITenex(IVotingEscrow(_ve).token());
         voter = IVoter(_voter);
         ve = IVotingEscrow(_ve);
         team = msg.sender;
@@ -73,6 +73,16 @@ contract Minter is IMinter {
         if (msg.sender != team) revert NotTeam();
         if (_team == address(0)) revert ZeroAddress();
         pendingTeam = _team;
+    }
+
+    function setRedemptionReceiver(address _receiver) external {
+        if (msg.sender != team) revert NotTeam();
+        tenex.setRedemptionReceiver(_receiver);
+    }
+
+    function setMerkleClaim(address _merkleclaim) external {
+        if (msg.sender != team) revert NotTeam();
+        tenex.setMerkleClaim(_merkleclaim);
     }
 
     /// @inheritdoc IMinter
@@ -93,8 +103,8 @@ contract Minter is IMinter {
     /// @inheritdoc IMinter
     function calculateGrowth(uint256 _minted) public view returns (uint256 _growth) {
         uint256 _veTotal = ve.totalSupplyAt(activePeriod - 1);
-        uint256 _veloTotal = velo.totalSupply();
-        return (((((_minted * _veTotal) / _veloTotal) * _veTotal) / _veloTotal) * _veTotal) / _veloTotal / 2;
+        uint256 _tenexTotal = tenex.totalSupply();
+        return (((((_minted * _veTotal) / _tenexTotal) * _veTotal) / _tenexTotal) * _veTotal) / _tenexTotal / 2;
     }
 
     /// @inheritdoc IMinter
@@ -128,7 +138,7 @@ contract Minter is IMinter {
             activePeriod = _period;
             uint256 _weekly = weekly;
             uint256 _emission;
-            uint256 _totalSupply = velo.totalSupply();
+            uint256 _totalSupply = tenex.totalSupply();
             bool _tail = _weekly < TAIL_START;
 
             if (_tail) {
@@ -145,19 +155,19 @@ contract Minter is IMinter {
             uint256 _teamEmissions = (_rate * (_growth + _emission)) / (MAX_BPS);
 
             uint256 _required = _growth + _emission + _teamEmissions;
-            uint256 _balanceOf = velo.balanceOf(address(this));
+            uint256 _balanceOf = tenex.balanceOf(address(this));
             if (_balanceOf < _required) {
-                velo.mint(address(this), _required - _balanceOf);
+                tenex.mint(address(this), _required - _balanceOf);
             }
 
-            velo.safeTransfer(address(team), _teamEmissions);
-            velo.safeTransfer(address(rewardsDistributor), _growth);
+            tenex.safeTransfer(address(team), _teamEmissions);
+            tenex.safeTransfer(address(rewardsDistributor), _growth);
             rewardsDistributor.checkpointToken(); // checkpoint token balance that was just minted in rewards distributor
 
-            velo.safeApprove(address(voter), _emission);
+            tenex.safeApprove(address(voter), _emission);
             voter.notifyRewardAmount(_emission);
 
-            emit Mint(msg.sender, _emission, velo.totalSupply(), _tail);
+            emit Mint(msg.sender, _emission, tenex.totalSupply(), _tail);
         }
     }
 }

@@ -1,7 +1,7 @@
 import { deploy } from "./utils/helpers";
 import { VeloGovernor, EpochGovernor } from "../../artifacts/types";
 import jsonConstants from "../constants/Blast.json";
-import deployedContracts from "../constants/output/VelodromeV2Output.json";
+import deployedContracts from "../constants/output/TenexOutput.json";
 
 
 async function main() {
