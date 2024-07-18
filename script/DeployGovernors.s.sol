@@ -3,6 +3,7 @@ pragma solidity 0.8.19;
 
 import "forge-std/StdJson.sol";
 import "../test/Base.sol";
+import "forge-std/console.sol";
 
 contract DeployGovernors is Script {
     using stdJson for string;
@@ -34,6 +35,7 @@ contract DeployGovernors is Script {
         escrow = VotingEscrow(abi.decode(vm.parseJson(jsonConstants, ".current.VotingEscrow"), (address)));
         voter = IVoter(abi.decode(vm.parseJson(jsonConstants, ".current.Voter"), (address)));
         forwarder = Forwarder(abi.decode(vm.parseJson(jsonConstants, ".current.Forwarder"), (address)));
+
         minter = Minter(abi.decode(vm.parseJson(jsonConstants, ".current.Minter"), (address)));
 
         require(address(escrow) != address(0)); // sanity check for constants file fillled out correctly

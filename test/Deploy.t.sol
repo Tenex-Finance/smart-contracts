@@ -8,6 +8,7 @@ import "../script/DeployGaugesAndPools.s.sol";
 import "../script/DeployGovernors.s.sol";
 
 import "./BaseTest.sol";
+import "forge-std/console.sol";
 
 contract TestDeploy is BaseTest {
     using stdJson for string;
@@ -81,6 +82,7 @@ contract TestDeploy is BaseTest {
 
         assertEq(deployTenex.voter().epochGovernor(), team);
         assertEq(deployTenex.voter().governor(), team);
+
 
         // deployTenex checks
 

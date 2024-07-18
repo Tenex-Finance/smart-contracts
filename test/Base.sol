@@ -106,7 +106,6 @@ abstract contract Base is Script, Test {
 
     function deployFactories() public {
         implementation = new Pool();
-        console.log("impl--");
         console.log(address(implementation));
         factory = new PoolFactory(address(implementation));
 

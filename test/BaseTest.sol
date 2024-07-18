@@ -58,8 +58,8 @@ abstract contract BaseTest is Base, TestOwner {
     SigUtils sigUtils;
 
     uint256 optimismFork;
-    /// @dev set OPTIMISM_RPC_URL in .env to run mainnet tests
-    string OPTIMISM_RPC_URL = vm.envString("OPTIMISM_RPC_URL");
+    /// @dev set BLAST_RPC_URL in .env to run mainnet tests
+    string BLAST_RPC_URL = vm.envString("BLAST_RPC_URL");
     /// @dev optionally set FORK_BLOCK_NUMBER in .env / test set up for faster tests / fixed tests
     uint256 BLOCK_NUMBER = vm.envOr("FORK_BLOCK_NUMBER", uint256(0));
 
@@ -194,9 +194,9 @@ abstract contract BaseTest is Base, TestOwner {
 
     function _forkSetupBefore() public {
         if (BLOCK_NUMBER != 0) {
-            optimismFork = vm.createFork(OPTIMISM_RPC_URL, BLOCK_NUMBER);
+            optimismFork = vm.createFork(BLAST_RPC_URL, BLOCK_NUMBER);
         } else {
-            optimismFork = vm.createFork(OPTIMISM_RPC_URL);
+            optimismFork = vm.createFork(BLAST_RPC_URL);
         }
         vm.selectFork(optimismFork);
     }

@@ -52,7 +52,7 @@ contract DeployTenex is Base {
 
         // Loading output and use output path to later save deployed contracts
         basePath = string.concat(basePath, "output/");
-        path = string.concat(basePath, "DeployTENEXdromeV2-");
+        path = string.concat(basePath, "DeployTenex-");
         path = string.concat(path, outputFilename);
 
         // start broadcasting transactions
