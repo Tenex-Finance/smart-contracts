@@ -153,9 +153,9 @@ async function main() {
   await distributor.setMinter(minter.address);
 
   //Initial Mint
-  await TENEX.initialMint(jsonConstants.team);
+  //await TENEX.initialMint(jsonConstants.team);
   
-  await TENEX.setMinter(minter.address);
+  //await TENEX.setMinter(minter.address);
   
   // Initialize 
   await voter.initialize(jsonConstants.whitelistTokens, minter.address);

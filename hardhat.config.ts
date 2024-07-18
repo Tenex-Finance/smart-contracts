@@ -11,7 +11,7 @@ export default {
   networks: {
     hardhat: {},
     blastSepolia: {
-      url: "https://blast-sepolia.infura.io/v3/9825e07b04b544679b88dc78bdf014e8",
+      url: `https://blast-sepolia.infura.io/v3/${process.env.INFURA_KEY}`,
       accounts: [`${process.env.PRIVATE_KEY_DEPLOY}`],
       gasPrice : 1000000
 

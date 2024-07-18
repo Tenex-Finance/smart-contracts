@@ -20,7 +20,8 @@ async function main() {
     deployedContracts.voter
   );
 
-  await governor.setVetoer(jsonConstants.team);
+  await governor.setVetoer(jsonConstants.vetoer);
+  await governor.setTeam(jsonConstants.team)
   console.log(`Governor deployed to: ${governor.address}`);
   console.log(`EpochGovernor deployed to: ${epochGovernor.address}`);
 }
