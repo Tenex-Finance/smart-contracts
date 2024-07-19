@@ -22,6 +22,7 @@ contract DeployTenex is Base {
     address feeManager;
     address team;
     address emergencyCouncil;
+    bytes32 merkleRoot;
 
     constructor() {
         string memory root = vm.projectRoot();
@@ -35,6 +36,7 @@ contract DeployTenex is Base {
         team = abi.decode(vm.parseJson(jsonConstants, ".team"), (address));
         feeManager = abi.decode(vm.parseJson(jsonConstants, ".feeManager"), (address));
         emergencyCouncil = abi.decode(vm.parseJson(jsonConstants, ".emergencyCouncil"), (address));
+        merkleRoot = abi.decode(vm.parseJson(jsonConstants, ".merkleRoot"), (bytes32));
     }
 
     function run() public {
@@ -61,11 +63,13 @@ contract DeployTenex is Base {
         // deploy TENEX
         TENEX = Tenex(abi.decode(vm.parseJson(jsonConstants, ".TENEX"), (address)));
 
-        console.log("tenex-----",address(TENEX));
+        merkleClaim = new MerkleClaim(address(TENEX), merkleRoot);
 
         tokens.push(address(TENEX));
 
         TENEX.initialMint(team); // need to verify
+
+        TENEX.setMerkleClaim(address(merkleClaim));
     }
 
     function _deploySetupAfter() public {

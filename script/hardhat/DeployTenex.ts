@@ -17,6 +17,7 @@ import {
   VeArtProxy,
   VotingEscrow,
   TenexForwarder,
+  MerkleClaim,
 } from "../../artifacts/types";
 import jsonConstants from "../constants/Blast.json";
 
@@ -40,6 +41,8 @@ async function main() {
   // ====== start _deploySetupBefore() ======
 
   const TENEX_ADDRESS = jsonConstants.TENEX;
+
+  const merkleRoot = jsonConstants.merkleRoot;
 
 
   const TENEX = await getContractAt<Tenex>("Tenex", TENEX_ADDRESS);
@@ -138,6 +141,13 @@ async function main() {
     voter.address,
     jsonConstants.WETH
   );
+
+  const merkleClaim = await deploy<MerkleClaim>(
+    "MerkleClaim",
+    undefined,
+    TENEX_ADDRESS,
+    merkleRoot
+  )
   
 
   const minter = await deploy<Minter>(
@@ -152,6 +162,8 @@ async function main() {
 
   //Initial Mint
   await TENEX.initialMint(jsonConstants.team);
+
+  await TENEX.setMerkleClaim(merkleClaim.address);
   
   await TENEX.setMinter(minter.address);
   
