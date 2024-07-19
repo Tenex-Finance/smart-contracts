@@ -16,7 +16,7 @@ contract Tenex is ITenex, ERC20Permit {
     address public redemptionReceiver;
     bool public initialMinted;
 
-    constructor() ERC20("Tenex", "TENEX") ERC20Permit("Tenex") {
+    constructor() ERC20("Otaku", "OTK") ERC20Permit("Otaku") {
         minter = msg.sender;
         owner = msg.sender;
     }

@@ -25,7 +25,7 @@ contract DeployGaugesAndPools is Script {
         address tokenB;
     }
 
-    struct PoolTenex{
+    struct PoolTenex {
         bool stable;
         address token;
     }
@@ -52,15 +52,12 @@ contract DeployGaugesAndPools is Script {
         voter = Voter(abi.decode(jsonOutput.parseRaw(".Voter"), (address)));
         TENEX = abi.decode(jsonOutput.parseRaw(".TENEX"), (address));
 
-        vm.startBroadcast(deployerAddress);
+        vm.startBroadcast(deployPrivateKey);
 
         // Deploy all non-TENEX pools & gauges
         for (uint256 i = 0; i < pools.length; i++) {
             address newPool = factory.createPool(pools[i].tokenA, pools[i].tokenB, pools[i].stable);
-            console.log("p---------->",newPool);
             address newGauge = voter.createGauge(address(factory), newPool);
-            console.log("g---------->",newGauge);
-
 
             poolsV2.push(newPool);
             gauges.push(newGauge);

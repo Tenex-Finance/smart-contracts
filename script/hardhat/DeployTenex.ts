@@ -16,7 +16,6 @@ import {
   Voter,
   VeArtProxy,
   VotingEscrow,
-  IERC20,
   TenexForwarder,
 } from "../../artifacts/types";
 import jsonConstants from "../constants/Blast.json";
@@ -39,9 +38,8 @@ interface TenexOutput {
 
 async function main() {
   // ====== start _deploySetupBefore() ======
-  const ONE = "1000000000000000000";
 
-  const TENEX_ADDRESS = "0x50BA9B7E05cE03f1a9a5D154AA4fb1523d5D70Ed";
+  const TENEX_ADDRESS = jsonConstants.TENEX;
 
 
   const TENEX = await getContractAt<Tenex>("Tenex", TENEX_ADDRESS);
@@ -153,9 +151,9 @@ async function main() {
   await distributor.setMinter(minter.address);
 
   //Initial Mint
-  //await TENEX.initialMint(jsonConstants.team);
+  await TENEX.initialMint(jsonConstants.team);
   
-  //await TENEX.setMinter(minter.address);
+  await TENEX.setMinter(minter.address);
   
   // Initialize 
   await voter.initialize(jsonConstants.whitelistTokens, minter.address);
@@ -175,7 +173,7 @@ async function main() {
   // ====== end _deploySetupAfter() ======
 
   const outputDirectory = "script/constants/output";
-  const outputFile = join(process.cwd(), outputDirectory, "TenexOutput.json");
+  const outputFile = join(process.cwd(), outputDirectory, "TenexOutput2.json");
 
   const output: TenexOutput = {
     artProxy: artProxy.address,

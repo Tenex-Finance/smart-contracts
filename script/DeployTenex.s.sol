@@ -56,12 +56,16 @@ contract DeployTenex is Base {
         path = string.concat(path, outputFilename);
 
         // start broadcasting transactions
-        vm.startBroadcast(deployerAddress);
+        vm.startBroadcast(deployPrivateKey);
 
         // deploy TENEX
-        TENEX = new Tenex();
+        TENEX = Tenex(abi.decode(vm.parseJson(jsonConstants, ".TENEX"), (address)));
+
+        console.log("tenex-----",address(TENEX));
 
         tokens.push(address(TENEX));
+
+        TENEX.initialMint(team); // need to verify
     }
 
     function _deploySetupAfter() public {
@@ -77,6 +81,8 @@ contract DeployTenex is Base {
         // Set contract vars
         factory.setFeeManager(feeManager);
         factory.setVoter(address(voter));
+
+        minter.acceptTeam();
 
         // finish broadcasting transactions
         vm.stopBroadcast();

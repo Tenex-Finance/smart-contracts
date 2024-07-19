@@ -82,8 +82,6 @@ contract TestDeploy is BaseTest {
 
         assertEq(deployTenex.voter().epochGovernor(), team);
         assertEq(deployTenex.voter().governor(), team);
-
-
         // deployTenex checks
 
         // ensure all tokens are added to voter
@@ -147,11 +145,7 @@ contract TestDeploy is BaseTest {
         PoolTenex[] memory poolsTenex = abi.decode(jsonConstants.parseRaw(".poolsTenex"), (PoolTenex[]));
         for (uint256 i = 0; i < poolsTenex.length; i++) {
             PoolTenex memory p = poolsTenex[i];
-            address poolAddr = deployTenex.factory().getPool(
-                address(deployTenex.TENEX()),
-                p.token,
-                p.stable
-            );
+            address poolAddr = deployTenex.factory().getPool(address(deployTenex.TENEX()), p.token, p.stable);
             assertTrue(poolAddr != address(0));
             address gaugeAddr = deployTenex.voter().gauges(poolAddr);
             assertTrue(gaugeAddr != address(0));
