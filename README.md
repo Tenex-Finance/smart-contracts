@@ -76,10 +76,6 @@ In order to run mainnet fork tests against Blast, inherit `BaseTest` in `BaseTes
 
 See `script/README.md` for more detail.
 
-## Security
-
-For general information about security include audits, bug bounty and deployed contracts, go [here](https://Tenex.finance/security).
-
 ### Access Control
 See `PERMISSIONS.md` for more detail.
 
