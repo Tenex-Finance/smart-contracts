@@ -2,7 +2,7 @@
 pragma solidity 0.8.19;
 
 /// @title SafeCast Library
-/// @author velodrome.finance
+/// @author tenex.finance
 /// @notice Safely convert unsigned and signed integers without overflow / underflow
 library SafeCastLibrary {
     error SafeCastOverflow();

@@ -14,7 +14,7 @@ import {ERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20P
 import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 /// @title Pool
-/// @author velodrome.finance, @figs999, @pegahcarter
+/// @author tenex.finance
 /// @notice Veldrome V2 token pool, either stable or volatile
 contract Pool is IPool, ERC20Permit, ReentrancyGuard {
     using SafeERC20 for IERC20;

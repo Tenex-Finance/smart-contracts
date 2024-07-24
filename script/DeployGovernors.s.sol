@@ -42,18 +42,17 @@ contract DeployGovernors is Script {
 
         vm.startBroadcast(deployPrivateKey);
 
-        console.log("gov------->", address(escrow), address(voter));
-
         governor = new TenexGovernor(escrow, IVoter(voter));
         epochGovernor = new EpochGovernor(address(forwarder), escrow, address(minter), IVoter(voter));
 
         governor.setVetoer(vetoer);
         governor.setTeam(team);
 
-        voter.setEpochGovernor(address(epochGovernor));
-        voter.setGovernor(address(governor));
+        voter.setEpochGovernor(address(epochGovernor));// by the team need to verify
+        voter.setGovernor(address(governor));// by the team need to verify
 
         governor.acceptVetoer();
+        governor.acceptTeam();
 
         vm.stopBroadcast();
 

@@ -10,11 +10,11 @@ Hardhat support was included as a way to provide an easy way to test the contrac
 
 ## Deployment
 
-1. Deploy the VelodromeV2 contracts:
+1. Deploy the Tenex contracts:
 
-`npx hardhat run script/hardhat/DeployVelodromeV2.ts --network tenderly`
+`npx hardhat run script/hardhat/DeployTenex.ts --network tenderly`
 
-The contracts that were deployed will be saved in `script/constants/output/VelodromeV2Output.json`. 
+The contracts that were deployed will be saved in `script/constants/output/TenexOutput.json`. 
 
 2. Deploy V2 pools and create gauges for them.
 

@@ -61,15 +61,17 @@ contract DeployTenex is Base {
         vm.startBroadcast(deployPrivateKey);
 
         // deploy TENEX
-        TENEX = Tenex(abi.decode(vm.parseJson(jsonConstants, ".TENEX"), (address)));
+        //TENEX = Tenex(abi.decode(vm.parseJson(jsonConstants, ".TENEX"), (address)));
+        TENEX = new Tenex();
 
         merkleClaim = new MerkleClaim(address(TENEX), merkleRoot);
 
         tokens.push(address(TENEX));
 
-        TENEX.initialMint(team); // need to verify
+        TENEX.initialMint(team);
 
-        TENEX.setMerkleClaim(address(merkleClaim));
+
+        TENEX.setMerkleClaim(address(merkleClaim));// need to verify ; placement of this transaction
     }
 
     function _deploySetupAfter() public {
@@ -86,7 +88,7 @@ contract DeployTenex is Base {
         factory.setFeeManager(feeManager);
         factory.setVoter(address(voter));
 
-        minter.acceptTeam();
+        minter.acceptTeam();// need to verify
 
         // finish broadcasting transactions
         vm.stopBroadcast();

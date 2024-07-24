@@ -11,8 +11,8 @@ import {IEpochGovernor} from "./interfaces/IEpochGovernor.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 /// @title Minter
-/// @author velodrome.finance, @figs999, @pegahcarter
-/// @notice Controls minting of emissions and rebases for Velodrome
+/// @author tenex finance
+/// @notice Controls minting of emissions and rebases for Tenex
 contract Minter is IMinter {
     using SafeERC20 for ITenex;
     /// @inheritdoc IMinter

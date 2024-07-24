@@ -2,7 +2,7 @@
 pragma solidity 0.8.19;
 
 import "forge-std/Test.sol";
-import "forge-std/console2.sol";
+import "forge-std/console.sol";
 
 import "./Base.sol";
 import {IPool, Pool} from "contracts/Pool.sol";
@@ -57,7 +57,7 @@ abstract contract BaseTest is Base, TestOwner {
 
     SigUtils sigUtils;
 
-    uint256 optimismFork;
+    uint256 blastFork;
     /// @dev set BLAST_RPC_URL in .env to run mainnet tests
     string BLAST_RPC_URL = vm.envString("BLAST_RPC_URL");
     /// @dev optionally set FORK_BLOCK_NUMBER in .env / test set up for faster tests / fixed tests
@@ -194,11 +194,11 @@ abstract contract BaseTest is Base, TestOwner {
 
     function _forkSetupBefore() public {
         if (BLOCK_NUMBER != 0) {
-            optimismFork = vm.createFork(BLAST_RPC_URL, BLOCK_NUMBER);
+            blastFork = vm.createFork(BLAST_RPC_URL, BLOCK_NUMBER);
         } else {
-            optimismFork = vm.createFork(BLAST_RPC_URL);
+            blastFork = vm.createFork(BLAST_RPC_URL);
         }
-        vm.selectFork(optimismFork);
+        vm.selectFork(blastFork);
     }
 
     function deployOwners() public {

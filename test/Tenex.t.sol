@@ -8,7 +8,6 @@ contract TenexTest is BaseTest {
     Tenex token;
     address recipient = address(0x456);
     address redemptionReceiver = address(0x2);
-    address merkleClaim = address(0x3);
     address user = address(0x4);
 
     function _setUp() public override {
@@ -23,7 +22,7 @@ contract TenexTest is BaseTest {
 
         // Set the merkleClaim
         vm.prank(address(owner5));
-        token.setMerkleClaim(merkleClaim);
+        token.setMerkleClaim(address(merkleClaim));
     }
 
     function testCannotSetMinterIfNotMinter() public {
@@ -97,7 +96,7 @@ contract TenexTest is BaseTest {
     }
 
     function testClaimByMerkleClaim() public {
-        vm.prank(merkleClaim);
+        vm.prank(address(merkleClaim));
         token.claim(user, 2000);
 
         assertEq(token.balanceOf(user), 2000);

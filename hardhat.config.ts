@@ -27,8 +27,8 @@ export default {
     },
   },
   tenderly: {
-    username: "velodrome-finance",
-    project: "v2",
+    username: "tenex-finance",
+    project: "v1",
     privateVerification: false,
   },
   paths: {

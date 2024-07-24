@@ -10,9 +10,24 @@ contract DeployTenexToken is Base {
     string public basePath;
     string public path;
 
+    string public constantsFilename = vm.envString("CONSTANTS_FILENAME");
+    string public jsonConstants;
+
     uint256 public deployPrivateKey = vm.envUint("PRIVATE_KEY_DEPLOY");
 
     address public deployerAddress = vm.addr(deployPrivateKey);
+
+    address team;
+
+    constructor() {
+        string memory root = vm.projectRoot();
+        basePath = string.concat(root, "/script/constants/");
+
+        // load constants
+        path = string.concat(basePath, constantsFilename);
+        jsonConstants = vm.readFile(path);
+        team = abi.decode(vm.parseJson(jsonConstants, ".team"), (address));
+    }
 
     function run() public {
         _deployToken();
@@ -24,8 +39,10 @@ contract DeployTenexToken is Base {
         vm.startBroadcast(deployPrivateKey);
         TENEX = new Tenex();
 
+        TENEX.initialMint(team); // need to verify
+
         vm.stopBroadcast();
-        
+
         console.log("tenex-----", address(TENEX));
     }
 }

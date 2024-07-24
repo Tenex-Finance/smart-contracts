@@ -15,7 +15,7 @@ async function main() {
   let poolsV2: string[]=[];
   let gaugesPoolsV2: string[]=[];
 
-  // Deploy non-VELO pools and gauges
+  // Deploy non-TENEX pools and gauges
   for (var i = 0; i < jsonConstants.poolsV2.length; i++) {
     const { stable, tokenA, tokenB } = jsonConstants.poolsV2[i];
     await factory.functions["createPool(address,address,bool)"](
@@ -49,7 +49,7 @@ async function main() {
 
   }
 
-  // Deploy VELO pools and gauges
+  // Deploy TENEX pools and gauges
   for (var i = 0; i < jsonConstants.poolsTenex.length; i++) {
     const [stable, token] = Object.values(jsonConstants.poolsTenex[i]);
     await factory.functions["createPool(address,address,bool)"](

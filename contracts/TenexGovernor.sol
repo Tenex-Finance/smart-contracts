@@ -13,8 +13,8 @@ import {VetoGovernorVotesQuorumFraction} from "./governance/VetoGovernorVotesQuo
 import {VetoGovernorPreventLateQuorum} from "./governance/VetoGovernorPreventLateQuorum.sol";
 
 /// @title TenexGovernor
-/// @author velodrome.finance, @figs999, @pegahcarter
-/// @notice Velodrome V2 governance with timestamp-based voting power from VotingEscrow NFTs
+/// @author tenex.finance
+/// @notice Tenex  governance with timestamp-based voting power from VotingEscrow NFTs
 ///         Supports vetoing of proposals as mitigation for 51% attacks
 ///         Votes are cast and counted on a per tokenId basis
 contract TenexGovernor is

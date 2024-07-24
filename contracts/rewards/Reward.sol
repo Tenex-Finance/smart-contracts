@@ -11,7 +11,7 @@ import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.
 import {TenexTimeLibrary} from "../libraries/TenexTimeLibrary.sol";
 
 /// @title Reward
-/// @author velodrome.finance, @figs999, @pegahcarter
+/// @author tenex.finance
 /// @notice Base reward contract for distribution of rewards
 abstract contract Reward is IReward, ERC2771Context, ReentrancyGuard {
     using SafeERC20 for IERC20;
