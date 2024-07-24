@@ -4,13 +4,15 @@ pragma solidity 0.8.19;
 import "forge-std/StdJson.sol";
 import "../test/Base.sol";
 
-contract DeployVelodromeV2 is Base {
+contract DeployTenex is Base {
     using stdJson for string;
     string public basePath;
     string public path;
 
     uint256 public deployPrivateKey = vm.envUint("PRIVATE_KEY_DEPLOY");
+
     address public deployerAddress = vm.addr(deployPrivateKey);
+
     string public constantsFilename = vm.envString("CONSTANTS_FILENAME");
     string public outputFilename = vm.envString("OUTPUT_FILENAME");
     string public jsonConstants;
@@ -20,6 +22,7 @@ contract DeployVelodromeV2 is Base {
     address feeManager;
     address team;
     address emergencyCouncil;
+    bytes32 merkleRoot;
 
     constructor() {
         string memory root = vm.projectRoot();
@@ -33,6 +36,7 @@ contract DeployVelodromeV2 is Base {
         team = abi.decode(vm.parseJson(jsonConstants, ".team"), (address));
         feeManager = abi.decode(vm.parseJson(jsonConstants, ".feeManager"), (address));
         emergencyCouncil = abi.decode(vm.parseJson(jsonConstants, ".emergencyCouncil"), (address));
+        merkleRoot = abi.decode(vm.parseJson(jsonConstants, ".merkleRoot"), (bytes32));
     }
 
     function run() public {
@@ -50,16 +54,21 @@ contract DeployVelodromeV2 is Base {
 
         // Loading output and use output path to later save deployed contracts
         basePath = string.concat(basePath, "output/");
-        path = string.concat(basePath, "DeployVelodromeV2-");
+        path = string.concat(basePath, "DeployTenex-");
         path = string.concat(path, outputFilename);
 
         // start broadcasting transactions
-        vm.startBroadcast(deployerAddress);
+        vm.startBroadcast(deployPrivateKey);
 
-        // deploy VELO
-        VELO = new Velo();
+        // deploy TENEX
+        TENEX = Tenex(abi.decode(vm.parseJson(jsonConstants, ".TENEX"), (address)));
+        //TENEX = new Tenex(); // for forking
 
-        tokens.push(address(VELO));
+        merkleClaim = new MerkleClaim(address(TENEX), merkleRoot);
+
+        tokens.push(address(TENEX));
+
+        TENEX.setMerkleClaim(address(merkleClaim));// need to verify ; placement of this transaction
     }
 
     function _deploySetupAfter() public {
@@ -76,11 +85,13 @@ contract DeployVelodromeV2 is Base {
         factory.setFeeManager(feeManager);
         factory.setVoter(address(voter));
 
+        minter.acceptTeam();// need to verify
+
         // finish broadcasting transactions
         vm.stopBroadcast();
 
         // write to file
-        vm.writeJson(vm.serializeAddress("v2", "VELO", address(VELO)), path);
+        vm.writeJson(vm.serializeAddress("v2", "TENEX", address(TENEX)), path);
         vm.writeJson(vm.serializeAddress("v2", "VotingEscrow", address(escrow)), path);
         vm.writeJson(vm.serializeAddress("v2", "Forwarder", address(forwarder)), path);
         vm.writeJson(vm.serializeAddress("v2", "ArtProxy", address(artProxy)), path);

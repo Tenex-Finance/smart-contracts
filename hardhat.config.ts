@@ -4,41 +4,41 @@ import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-foundry";
 
 dotenv.config();
-tdly.setup({ automaticVerifications: true });
-
+tdly.setup({ automaticVerifications: false });
 
 export default {
-    defaultNetwork: "tenderly",
-    networks: {
-        hardhat: {
-        },
-        tenderly: {
-            url: `https://rpc.tenderly.co/fork/${process.env.TENDERLY_FORK_ID}`,
-            accounts: [`${process.env.PRIVATE_KEY_DEPLOY}`]
-        }
+  defaultNetwork: "tenderly",
+  networks: {
+    hardhat: {},
+    blastSepolia: {
+      url: `https://blast-sepolia.infura.io/v3/${process.env.INFURA_KEY}`,
+      accounts: [`${process.env.PRIVATE_KEY_DEPLOY}`],
+      gasPrice : 1000000
+
     },
-    solidity: {
-        version: "0.8.19",
-        settings: {
-            optimizer: {
-                enabled: true,
-                runs: 200
-            }
-        }
+  },
+  solidity: {
+    version: "0.8.19",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
     },
-    tenderly: {
-        username: "velodrome-finance",
-        project: "v2",
-        privateVerification: false
-    },
-    paths: {
-        sources: "./contracts",
-        tests: "./test",
-        cache: "./cache",
-        artifacts: "./artifacts"
-    },
-    typechain: {
-        outDir: "artifacts/types",
-        target: "ethers-v5"
-    }
+  },
+  tenderly: {
+    username: "tenex-finance",
+    project: "v1",
+    privateVerification: false,
+  },
+  paths: {
+    sources: "./contracts",
+    tests: "./test",
+    cache: "./cache",
+    artifacts: "./artifacts",
+  },
+  typechain: {
+    outDir: "artifacts/types",
+    target: "ethers-v5",
+  },
 };

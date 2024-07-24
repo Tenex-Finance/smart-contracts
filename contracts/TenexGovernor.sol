@@ -12,12 +12,12 @@ import {VetoGovernorVotes} from "./governance/VetoGovernorVotes.sol";
 import {VetoGovernorVotesQuorumFraction} from "./governance/VetoGovernorVotesQuorumFraction.sol";
 import {VetoGovernorPreventLateQuorum} from "./governance/VetoGovernorPreventLateQuorum.sol";
 
-/// @title VeloGovernor
-/// @author velodrome.finance, @figs999, @pegahcarter
-/// @notice Velodrome V2 governance with timestamp-based voting power from VotingEscrow NFTs
+/// @title TenexGovernor
+/// @author tenex.finance
+/// @notice Tenex  governance with timestamp-based voting power from VotingEscrow NFTs
 ///         Supports vetoing of proposals as mitigation for 51% attacks
 ///         Votes are cast and counted on a per tokenId basis
-contract VeloGovernor is
+contract TenexGovernor is
     VetoGovernor,
     VetoGovernorCountingSimple,
     VetoGovernorVotes,
@@ -52,7 +52,7 @@ contract VeloGovernor is
         IVotes _ve,
         IVoter _voter
     )
-        VetoGovernor("Velodrome Governor", IVotingEscrow(address(_ve)))
+        VetoGovernor("Tenex Governor", IVotingEscrow(address(_ve)))
         VetoGovernorVotes(_ve)
         VetoGovernorVotesQuorumFraction(25)
         VetoGovernorPreventLateQuorum(2 days)

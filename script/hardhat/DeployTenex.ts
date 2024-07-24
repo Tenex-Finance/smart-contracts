@@ -12,16 +12,16 @@ import {
   Minter,
   RewardsDistributor,
   Router,
-  Velo,
+  Tenex,
   Voter,
   VeArtProxy,
   VotingEscrow,
-  IERC20,
-  VeloForwarder,
+  TenexForwarder,
+  MerkleClaim,
 } from "../../artifacts/types";
-import jsonConstants from "../constants/Optimism.json";
+import jsonConstants from "../constants/Blast.json";
 
-interface VelodromeV2Output {
+interface TenexOutput {
   artProxy: string;
   distributor: string;
   factoryRegistry: string;
@@ -31,7 +31,7 @@ interface VelodromeV2Output {
   minter: string;
   poolFactory: string;
   router: string;
-  VELO: string;
+  TENEX: string;
   voter: string;
   votingEscrow: string;
   votingRewardsFactory: string;
@@ -39,10 +39,15 @@ interface VelodromeV2Output {
 
 async function main() {
   // ====== start _deploySetupBefore() ======
-  const ONE = "1000000000000000000";
 
-  const VELO = await deploy<Velo>("Velo");
-  jsonConstants.whitelistTokens.push(VELO.address);
+  const TENEX_ADDRESS = jsonConstants.TENEX;
+
+  const merkleRoot = jsonConstants.merkleRoot;
+
+
+  const TENEX = await getContractAt<Tenex>("Tenex", TENEX_ADDRESS);
+
+  jsonConstants.whitelistTokens.push(TENEX_ADDRESS);
   // ====== end _deploySetupBefore() ======
 
   // ====== start _coreSetup() ======
@@ -78,7 +83,7 @@ async function main() {
   );
   // ====== end deployFactories() ======
 
-  const forwarder = await deploy<VeloForwarder>("VeloForwarder");
+  const forwarder = await deploy<TenexForwarder>("TenexForwarder");
 
   const balanceLogicLibrary = await deployLibrary("BalanceLogicLibrary");
   const delegationLogicLibrary = await deployLibrary("DelegationLogicLibrary");
@@ -91,7 +96,7 @@ async function main() {
     "VotingEscrow",
     libraries,
     forwarder.address,
-    VELO.address,
+    TENEX_ADDRESS,
     factoryRegistry.address
   );
 
@@ -125,6 +130,8 @@ async function main() {
 
   await escrow.setVoterAndDistributor(voter.address, distributor.address);
 
+  // Add merkle root deployment
+
   const router = await deploy<Router>(
     "Router",
     undefined,
@@ -135,6 +142,14 @@ async function main() {
     jsonConstants.WETH
   );
 
+  const merkleClaim = await deploy<MerkleClaim>(
+    "MerkleClaim",
+    undefined,
+    TENEX_ADDRESS,
+    merkleRoot
+  )
+  
+
   const minter = await deploy<Minter>(
     "Minter",
     undefined,
@@ -142,9 +157,17 @@ async function main() {
     escrow.address,
     distributor.address
   );
-  await distributor.setMinter(minter.address);
-  await VELO.setMinter(minter.address);
 
+  await distributor.setMinter(minter.address);
+
+  //Initial Mint
+  await TENEX.initialMint(jsonConstants.team);
+
+  await TENEX.setMerkleClaim(merkleClaim.address);
+  
+  await TENEX.setMinter(minter.address);
+  
+  // Initialize 
   await voter.initialize(jsonConstants.whitelistTokens, minter.address);
   // ====== end _coreSetup() ======
 
@@ -162,13 +185,9 @@ async function main() {
   // ====== end _deploySetupAfter() ======
 
   const outputDirectory = "script/constants/output";
-  const outputFile = join(
-    process.cwd(),
-    outputDirectory,
-    "VelodromeV2Output.json"
-  );
+  const outputFile = join(process.cwd(), outputDirectory, "TenexOutput2.json");
 
-  const output: VelodromeV2Output = {
+  const output: TenexOutput = {
     artProxy: artProxy.address,
     distributor: distributor.address,
     factoryRegistry: factoryRegistry.address,
@@ -178,7 +197,7 @@ async function main() {
     minter: minter.address,
     poolFactory: poolFactory.address,
     router: router.address,
-    VELO: VELO.address,
+    TENEX: TENEX_ADDRESS,
     voter: voter.address,
     votingEscrow: escrow.address,
     votingRewardsFactory: votingRewardsFactory.address,

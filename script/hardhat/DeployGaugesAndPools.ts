@@ -1,7 +1,9 @@
 import { getContractAt } from "./utils/helpers";
 import { PoolFactory, Voter } from "../../artifacts/types";
-import jsonConstants from "../constants/Optimism.json";
-import deployedContracts from "../constants/output/VelodromeV2Output.json";
+import jsonConstants from "../constants/Blast.json";
+import { join } from "path";
+import deployedContracts from "../constants/output/TenexOutput2.json";
+import { writeFile } from "fs/promises";
 
 async function main() {
   const factory = await getContractAt<PoolFactory>(
@@ -10,7 +12,10 @@ async function main() {
   );
   const voter = await getContractAt<Voter>("Voter", deployedContracts.voter);
 
-  // Deploy non-VELO pools and gauges
+  let poolsV2: string[]=[];
+  let gaugesPoolsV2: string[]=[];
+
+  // Deploy non-TENEX pools and gauges
   for (var i = 0; i < jsonConstants.poolsV2.length; i++) {
     const { stable, tokenA, tokenB } = jsonConstants.poolsV2[i];
     await factory.functions["createPool(address,address,bool)"](
@@ -32,13 +37,23 @@ async function main() {
       pool[0],
       { gasLimit: 5000000 }
     );
+    
+    let gauge = await voter.functions["gauges(address)"](
+      pool[0],
+      {
+        gasLimit: 5000000,
+      }
+    );
+    poolsV2.push(pool[0])
+    gaugesPoolsV2.push(gauge[0])
+
   }
 
-  // Deploy VELO pools and gauges
-  for (var i = 0; i < jsonConstants.poolsVeloV2.length; i++) {
-    const [stable, token] = Object.values(jsonConstants.poolsVeloV2[i]);
+  // Deploy TENEX pools and gauges
+  for (var i = 0; i < jsonConstants.poolsTenex.length; i++) {
+    const [stable, token] = Object.values(jsonConstants.poolsTenex[i]);
     await factory.functions["createPool(address,address,bool)"](
-      deployedContracts.VELO,
+      deployedContracts.TENEX,
       token,
       stable,
       {
@@ -46,7 +61,7 @@ async function main() {
       }
     );
     let pool = await factory.functions["getPool(address,address,bool)"](
-      deployedContracts.VELO,
+      deployedContracts.TENEX,
       token,
       stable,
       {
@@ -58,8 +73,34 @@ async function main() {
       pool[0],
       { gasLimit: 5000000 }
     );
+    let gauge = await voter.functions["gauges(address)"](
+      pool[0],
+      {
+        gasLimit: 5000000,
+      }
+    );
+    poolsV2.push(pool[0])
+    gaugesPoolsV2.push(gauge[0])
   }
+
+  const outputDirectory = "script/constants/output";
+  const outputFile = join(process.cwd(), outputDirectory, "TenexOutputPools2.json");
+
+  let output = {
+    poolsV2 : poolsV2,
+    gaugesPoolsV2: gaugesPoolsV2
+  }
+
+  try {
+    await writeFile(outputFile, JSON.stringify(output, null, 2));
+  } catch (err) {
+    console.error(`Error writing output file: ${err}`);
+  }
+
+
 }
+
+
 
 main().catch((error) => {
   console.error(error);

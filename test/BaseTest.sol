@@ -2,7 +2,7 @@
 pragma solidity 0.8.19;
 
 import "forge-std/Test.sol";
-import "forge-std/console2.sol";
+import "forge-std/console.sol";
 
 import "./Base.sol";
 import {IPool, Pool} from "contracts/Pool.sol";
@@ -57,9 +57,9 @@ abstract contract BaseTest is Base, TestOwner {
 
     SigUtils sigUtils;
 
-    uint256 optimismFork;
-    /// @dev set OPTIMISM_RPC_URL in .env to run mainnet tests
-    string OPTIMISM_RPC_URL = vm.envString("OPTIMISM_RPC_URL");
+    uint256 blastFork;
+    /// @dev set BLAST_RPC_URL in .env to run mainnet tests
+    string BLAST_RPC_URL = vm.envString("BLAST_RPC_URL");
     /// @dev optionally set FORK_BLOCK_NUMBER in .env / test set up for faster tests / fixed tests
     uint256 BLOCK_NUMBER = vm.envOr("FORK_BLOCK_NUMBER", uint256(0));
 
@@ -106,13 +106,13 @@ abstract contract BaseTest is Base, TestOwner {
         amounts[2] = TOKEN_10M;
         amounts[3] = TOKEN_10M;
         amounts[4] = TOKEN_10M;
-        mintToken(address(VELO), owners, amounts);
+        mintToken(address(TENEX), owners, amounts);
         mintToken(address(LR), owners, amounts);
 
         tokens.push(address(USDC));
         tokens.push(address(FRAX));
         tokens.push(address(DAI));
-        tokens.push(address(VELO));
+        tokens.push(address(TENEX));
         tokens.push(address(LR));
         tokens.push(address(WETH));
 
@@ -121,7 +121,7 @@ abstract contract BaseTest is Base, TestOwner {
 
     function _testSetupAfter() public {
         // Setup governors
-        governor = new VeloGovernor(escrow, IVoter(voter));
+        governor = new TenexGovernor(escrow, IVoter(voter));
         epochGovernor = new EpochGovernor(address(forwarder), escrow, address(minter), IVoter(voter));
         voter.setEpochGovernor(address(epochGovernor));
         voter.setGovernor(address(governor));
@@ -194,11 +194,11 @@ abstract contract BaseTest is Base, TestOwner {
 
     function _forkSetupBefore() public {
         if (BLOCK_NUMBER != 0) {
-            optimismFork = vm.createFork(OPTIMISM_RPC_URL, BLOCK_NUMBER);
+            blastFork = vm.createFork(BLAST_RPC_URL, BLOCK_NUMBER);
         } else {
-            optimismFork = vm.createFork(OPTIMISM_RPC_URL);
+            blastFork = vm.createFork(BLAST_RPC_URL);
         }
-        vm.selectFork(optimismFork);
+        vm.selectFork(blastFork);
     }
 
     function deployOwners() public {
@@ -227,7 +227,7 @@ abstract contract BaseTest is Base, TestOwner {
             WETH = IWETH(new MockWETH());
             FRAX = new MockERC20("FRAX", "FRAX", 18);
         }
-        VELO = new Velo();
+        TENEX = new Tenex();
         LR = new MockERC20("LR", "LR", 18);
     }
 
@@ -298,11 +298,11 @@ abstract contract BaseTest is Base, TestOwner {
 
     /// @dev Helper function to add rewards to gauge from voter
     function _addRewardToGauge(address _voter, address _gauge, uint256 _amount) internal {
-        deal(address(VELO), _voter, _amount);
+        deal(address(TENEX), _voter, _amount);
         vm.startPrank(_voter);
         // do not overwrite approvals if already set
-        if (VELO.allowance(_voter, _gauge) < _amount) {
-            VELO.approve(_gauge, _amount);
+        if (TENEX.allowance(_voter, _gauge) < _amount) {
+            TENEX.approve(_gauge, _amount);
         }
         Gauge(_gauge).notifyRewardAmount(_amount);
         vm.stopPrank();

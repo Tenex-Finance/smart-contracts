@@ -5,7 +5,7 @@ import "forge-std/StdJson.sol";
 import "../test/Base.sol";
 
 /// @notice Deploy script to deploy new pools and gauges for v2
-contract DeployGaugesAndPoolsV2 is Script {
+contract DeployGaugesAndPools is Script {
     using stdJson for string;
 
     uint256 public deployPrivateKey = vm.envUint("PRIVATE_KEY_DEPLOY");
@@ -17,7 +17,7 @@ contract DeployGaugesAndPoolsV2 is Script {
 
     PoolFactory public factory;
     Voter public voter;
-    address public VELO;
+    address public TENEX;
 
     struct PoolV2 {
         bool stable;
@@ -25,7 +25,7 @@ contract DeployGaugesAndPoolsV2 is Script {
         address tokenB;
     }
 
-    struct PoolVeloV2 {
+    struct PoolTenex {
         bool stable;
         address token;
     }
@@ -43,18 +43,18 @@ contract DeployGaugesAndPoolsV2 is Script {
         // load in vars
         jsonConstants = vm.readFile(path);
         PoolV2[] memory pools = abi.decode(jsonConstants.parseRaw(".poolsV2"), (PoolV2[]));
-        PoolVeloV2[] memory poolsVelo = abi.decode(jsonConstants.parseRaw(".poolsVeloV2"), (PoolVeloV2[]));
+        PoolTenex[] memory poolsTenex = abi.decode(jsonConstants.parseRaw(".poolsTenex"), (PoolTenex[]));
 
-        path = string.concat(basePath, "output/DeployVelodromeV2-");
+        path = string.concat(basePath, "output/DeployTenex-");
         path = string.concat(path, outputFilename);
         jsonOutput = vm.readFile(path);
         factory = PoolFactory(abi.decode(jsonOutput.parseRaw(".PoolFactory"), (address)));
         voter = Voter(abi.decode(jsonOutput.parseRaw(".Voter"), (address)));
-        VELO = abi.decode(jsonOutput.parseRaw(".VELO"), (address));
+        TENEX = abi.decode(jsonOutput.parseRaw(".TENEX"), (address));
 
-        vm.startBroadcast(deployerAddress);
+        vm.startBroadcast(deployPrivateKey);
 
-        // Deploy all non-VELO pools & gauges
+        // Deploy all non-TENEX pools & gauges
         for (uint256 i = 0; i < pools.length; i++) {
             address newPool = factory.createPool(pools[i].tokenA, pools[i].tokenB, pools[i].stable);
             address newGauge = voter.createGauge(address(factory), newPool);
@@ -63,9 +63,9 @@ contract DeployGaugesAndPoolsV2 is Script {
             gauges.push(newGauge);
         }
 
-        // Deploy all VELO pools & gauges
-        for (uint256 i = 0; i < poolsVelo.length; i++) {
-            address newPool = factory.createPool(VELO, poolsVelo[i].token, poolsVelo[i].stable);
+        // Deploy all TENEX pools & gauges
+        for (uint256 i = 0; i < poolsTenex.length; i++) {
+            address newPool = factory.createPool(TENEX, poolsTenex[i].token, poolsTenex[i].stable);
             address newGauge = voter.createGauge(address(factory), newPool);
 
             poolsV2.push(newPool);
@@ -75,7 +75,7 @@ contract DeployGaugesAndPoolsV2 is Script {
         vm.stopBroadcast();
 
         // Write to file
-        path = string.concat(basePath, "output/DeployGaugesAndPoolsV2-");
+        path = string.concat(basePath, "output/DeployGaugesAndPools-");
         path = string.concat(path, outputFilename);
         vm.writeJson(vm.serializeAddress("v2", "gaugesPoolsV2", gauges), path);
         vm.writeJson(vm.serializeAddress("v2", "poolsV2", poolsV2), path);

@@ -3,6 +3,7 @@ pragma solidity 0.8.19;
 
 import "forge-std/StdJson.sol";
 import "../test/Base.sol";
+import "forge-std/console.sol";
 
 contract DeployGovernors is Script {
     using stdJson for string;
@@ -20,7 +21,7 @@ contract DeployGovernors is Script {
     VotingEscrow public escrow;
     Forwarder public forwarder;
     Minter public minter;
-    VeloGovernor public governor;
+    TenexGovernor public governor;
     EpochGovernor public epochGovernor;
 
     function run() public {
@@ -34,17 +35,24 @@ contract DeployGovernors is Script {
         escrow = VotingEscrow(abi.decode(vm.parseJson(jsonConstants, ".current.VotingEscrow"), (address)));
         voter = IVoter(abi.decode(vm.parseJson(jsonConstants, ".current.Voter"), (address)));
         forwarder = Forwarder(abi.decode(vm.parseJson(jsonConstants, ".current.Forwarder"), (address)));
+
         minter = Minter(abi.decode(vm.parseJson(jsonConstants, ".current.Minter"), (address)));
 
         require(address(escrow) != address(0)); // sanity check for constants file fillled out correctly
 
-        vm.startBroadcast(deployerAddress);
+        vm.startBroadcast(deployPrivateKey);
 
-        governor = new VeloGovernor(escrow, IVoter(voter));
+        governor = new TenexGovernor(escrow, IVoter(voter));
         epochGovernor = new EpochGovernor(address(forwarder), escrow, address(minter), IVoter(voter));
 
         governor.setVetoer(vetoer);
         governor.setTeam(team);
+
+        voter.setEpochGovernor(address(epochGovernor));// by the team need to verify
+        voter.setGovernor(address(governor));// by the team need to verify
+
+        governor.acceptVetoer();
+        governor.acceptTeam();
 
         vm.stopBroadcast();
 

@@ -17,11 +17,11 @@ import {IGauge, Gauge} from "contracts/gauges/Gauge.sol";
 import {PoolFees} from "contracts/PoolFees.sol";
 import {RewardsDistributor, IRewardsDistributor} from "contracts/RewardsDistributor.sol";
 import {IRouter, Router} from "contracts/Router.sol";
-import {IVelo, Velo} from "contracts/Velo.sol";
+import {ITenex, Tenex} from "contracts/Tenex.sol";
 import {IVoter, Voter} from "contracts/Voter.sol";
 import {VeArtProxy} from "contracts/VeArtProxy.sol";
 import {IVotingEscrow, VotingEscrow} from "contracts/VotingEscrow.sol";
-import {VeloGovernor} from "contracts/VeloGovernor.sol";
+import {TenexGovernor} from "contracts/TenexGovernor.sol";
 import {EpochGovernor} from "contracts/EpochGovernor.sol";
 import {SafeCastLibrary} from "contracts/libraries/SafeCastLibrary.sol";
 import {IWETH} from "contracts/interfaces/IWETH.sol";
@@ -29,6 +29,7 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {SigUtils} from "test/utils/SigUtils.sol";
 import {Forwarder} from "@opengsn/contracts/src/forwarder/Forwarder.sol";
+import {MerkleClaim} from "contracts/redeem/MerkleClaim.sol";
 
 import "forge-std/Script.sol";
 import "forge-std/Test.sol";
@@ -45,13 +46,14 @@ abstract contract Base is Script, Test {
     Deployment deploymentType;
 
     IWETH public WETH;
-    Velo public VELO;
+    Tenex public TENEX;
     address[] public tokens;
 
     /// @dev Core v2 Deployment
     Forwarder public forwarder;
     Pool public implementation;
     Router public router;
+    MerkleClaim public merkleClaim;
     VotingEscrow public escrow;
     VeArtProxy public artProxy;
     PoolFactory public factory;
@@ -63,7 +65,7 @@ abstract contract Base is Script, Test {
     RewardsDistributor public distributor;
     Minter public minter;
     Gauge public gauge;
-    VeloGovernor public governor;
+    TenexGovernor public governor;
     EpochGovernor public epochGovernor;
 
     /// @dev Global address to set
@@ -74,7 +76,7 @@ abstract contract Base is Script, Test {
 
         forwarder = new Forwarder();
 
-        escrow = new VotingEscrow(address(forwarder), address(VELO), address(factoryRegistry));
+        escrow = new VotingEscrow(address(forwarder), address(TENEX), address(factoryRegistry));
         artProxy = new VeArtProxy(address(escrow));
         escrow.setArtProxy(address(artProxy));
 
@@ -97,7 +99,8 @@ abstract contract Base is Script, Test {
         // Setup minter
         minter = new Minter(address(voter), address(escrow), address(distributor));
         distributor.setMinter(address(minter));
-        VELO.setMinter(address(minter));
+
+        TENEX.setMinter(address(minter));
 
         /// @dev tokens are already set in the respective setupBefore()
         voter.initialize(tokens, address(minter));
