@@ -61,15 +61,12 @@ contract DeployTenex is Base {
         vm.startBroadcast(deployPrivateKey);
 
         // deploy TENEX
-        //TENEX = Tenex(abi.decode(vm.parseJson(jsonConstants, ".TENEX"), (address)));
-        TENEX = new Tenex();
+        TENEX = Tenex(abi.decode(vm.parseJson(jsonConstants, ".TENEX"), (address)));
+        //TENEX = new Tenex(); // for forking
 
         merkleClaim = new MerkleClaim(address(TENEX), merkleRoot);
 
         tokens.push(address(TENEX));
-
-        TENEX.initialMint(team);
-
 
         TENEX.setMerkleClaim(address(merkleClaim));// need to verify ; placement of this transaction
     }

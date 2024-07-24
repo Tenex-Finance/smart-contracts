@@ -82,25 +82,4 @@ For general information about security include audits, bug bounty and deployed c
 
 ### Access Control
 See `PERMISSIONS.md` for more detail.
-### Bug Bounty
-Tenex has a live bug bounty hosted on ([Immunefi](https://immunefi.com/bounty/Tenexfinance/)).
-
-## Deployment
-
-<!-- | Name               | Address                                                                                                                               | -->
-| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
-| ArtProxy               | [0x4A9eA0dd5649eC4B6745c60d1769e2184C1782DD](https://optimistic.etherscan.io/address/0x4A9eA0dd5649eC4B6745c60d1769e2184C1782DD#code) |
-| RewardsDistributor               | [0x9D4736EC60715e71aFe72973f7885DCBC21EA99b](https://optimistic.etherscan.io/address/0x9D4736EC60715e71aFe72973f7885DCBC21EA99b#code) |
-| FactoryRegistry               | [0xF4c67CdEAaB8360370F41514d06e32CcD8aA1d7B](https://optimistic.etherscan.io/address/0xF4c67CdEAaB8360370F41514d06e32CcD8aA1d7B#code) |
-| Forwarder               | [0x06824df38D1D77eADEB6baFCB03904E27429Ab74](https://optimistic.etherscan.io/address/0x06824df38D1D77eADEB6baFCB03904E27429Ab74#code) |
-| GaugeFactory               | [0x8391fE399640E7228A059f8Fa104b8a7B4835071](https://optimistic.etherscan.io/address/0x8391fE399640E7228A059f8Fa104b8a7B4835071#code) |
-| ManagedRewardsFactory               | [0xcDd9585005095ac7447d1fDbC990C5CFB805cff0](https://optimistic.etherscan.io/address/0xcDd9585005095ac7447d1fDbC990C5CFB805cff0#code) |
-| Minter               | [0x6dc9E1C04eE59ed3531d73a72256C0da46D10982](https://optimistic.etherscan.io/address/0x6dc9E1C04eE59ed3531d73a72256C0da46D10982#code) |
-| PoolFactory               | [0xF1046053aa5682b4F9a81b5481394DA16BE5FF5a](https://optimistic.etherscan.io/address/0xF1046053aa5682b4F9a81b5481394DA16BE5FF5a#code) |
-| Router               | [0xa062aE8A9c5e11aaA026fc2670B0D65cCc8B2858](https://optimistic.etherscan.io/address/0xa062aE8A9c5e11aaA026fc2670B0D65cCc8B2858#code) |
-| Tenex               | [0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db](https://optimistic.etherscan.io/address/0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db#code) |
-| Voter               | [0x41C914ee0c7E1A5edCD0295623e6dC557B5aBf3C](https://optimistic.etherscan.io/address/0x41C914ee0c7E1A5edCD0295623e6dC557B5aBf3C#code) |
-| VotingEscrow               | [0xFAf8FD17D9840595845582fCB047DF13f006787d](https://optimistic.etherscan.io/address/0xFAf8FD17D9840595845582fCB047DF13f006787d#code) |
-| VotingRewardsFactory               | [0x756E7C245C69d351FfFBfb88bA234aa395AdA8ec](https://optimistic.etherscan.io/address/0x756E7C245C69d351FfFBfb88bA234aa395AdA8ec#code) |
-| Pool               | [0x95885af5492195f0754be71ad1545fe81364e531](https://optimistic.etherscan.io/address/0x95885af5492195f0754be71ad1545fe81364e531#code) |
 
