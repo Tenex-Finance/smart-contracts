@@ -18,6 +18,7 @@ import {PoolFees} from "contracts/PoolFees.sol";
 import {RewardsDistributor, IRewardsDistributor} from "contracts/RewardsDistributor.sol";
 import {IRouter, Router} from "contracts/Router.sol";
 import {ITenex, Tenex} from "contracts/Tenex.sol";
+import {tMockToken} from "contracts/mockTokens/tMockToken.sol";
 import {IVoter, Voter} from "contracts/Voter.sol";
 import {VeArtProxy} from "contracts/VeArtProxy.sol";
 import {IVotingEscrow, VotingEscrow} from "contracts/VotingEscrow.sol";
@@ -47,6 +48,11 @@ abstract contract Base is Script, Test {
 
     IWETH public WETH;
     Tenex public TENEX;
+
+    // mock tokens
+    tMockToken[6] public TMOCK;
+
+
     address[] public tokens;
 
     /// @dev Core v2 Deployment
