@@ -8,7 +8,9 @@ contract TenexTest is BaseTest {
     Tenex token;
     address recipient = address(0x456);
     address redemptionReceiver = address(0x2);
-    address user = address(0x4);
+    address _merkleClaim = address(0x3);
+    address user1 = address(0x4);
+    address user2 = address(0);
 
     function _setUp() public override {
         token = new Tenex();
@@ -22,7 +24,7 @@ contract TenexTest is BaseTest {
 
         // Set the merkleClaim
         vm.prank(address(owner5));
-        token.setMerkleClaim(address(merkleClaim));
+        token.setMerkleClaim(address(_merkleClaim));
     }
 
     function testCannotSetMinterIfNotMinter() public {
@@ -87,25 +89,33 @@ contract TenexTest is BaseTest {
         token.mint(address(owner2), TOKEN_1);
     }
 
-     function testClaimByRedemptionReceiver() public {
+    function testClaimByRedemptionReceiver() public {
         vm.prank(redemptionReceiver);
-        token.claim(user, 1000);
+        token.claim(user1, 1000);
 
-        assertEq(token.balanceOf(user), 1000);
+        assertEq(token.balanceOf(user1), 1000);
+        assertEq(token.totalSupply(), 1000);
+    }
+
+    function testFailClaimByRedemptionReceiver() public {
+        vm.prank(redemptionReceiver);
+        token.claim(user2, 1000);
+
+        assertEq(token.balanceOf(user2), 1000);
         assertEq(token.totalSupply(), 1000);
     }
 
     function testClaimByMerkleClaim() public {
-        vm.prank(address(merkleClaim));
-        token.claim(user, 2000);
+        vm.prank(address(_merkleClaim));
+        token.claim(user1, 2000);
 
-        assertEq(token.balanceOf(user), 2000);
+        assertEq(token.balanceOf(user1), 2000);
         assertEq(token.totalSupply(), 2000);
     }
 
     function testClaimByUnauthorizedAddress() public {
-        vm.prank(user);
+        vm.prank(user1);
         vm.expectRevert(ITenex.ClaimNotAllowed.selector);
-        token.claim(user, 3000);
+        token.claim(user1, 3000);
     }
 }
