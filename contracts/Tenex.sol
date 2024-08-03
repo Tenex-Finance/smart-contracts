@@ -11,48 +11,61 @@ import {ERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20P
 /// @dev Emitted by the Minter
 contract Tenex is ITenex, ERC20Permit {
     address public minter;
-    address private owner;
     address public merkleClaim;
-    address public redemptionReceiver;
     bool public initialMinted;
 
     constructor() ERC20("Tenex", "TENEX") ERC20Permit("Tenex") {
         minter = msg.sender;
-        owner = msg.sender;
     }
 
-    /// @dev No checks as its meant to be once off to set minting rights to BaseV1 Minter
-    function setMinter(address _minter) external {
+    modifier onlyMinter() {
         if (msg.sender != minter) revert NotMinter();
+        _;
+    }
+
+    modifier checkAddress(address _account) {
+        if (_account == address(0)) revert ZeroAddress();
+        _;
+    }
+
+    /// @notice Set the minter address
+    /// @param _minter The address to set as the minter
+    function setMinter(address _minter) external checkAddress(_minter) onlyMinter {
         minter = _minter;
+        emit SetMinter(minter);
     }
 
-    function setMerkleClaim(address _merkleClaim) external {
-        if (msg.sender != minter) revert NotMinter();
+    /// @notice Set the merkle claim address
+    /// @param _merkleClaim The address to set for merkle claims
+    function setMerkleClaim(address _merkleClaim) external checkAddress(_merkleClaim) onlyMinter {
         merkleClaim = _merkleClaim;
+        emit SetMerkleClaim(merkleClaim);
     }
 
-    function setRedemptionReceiver(address _receiver) external {
-        if (msg.sender != minter) revert NotMinter();
-        redemptionReceiver = _receiver;
-    }
-
-    // Initial mint: total 100M
-    function initialMint(address _recipient) external {
-        if (msg.sender != minter) revert NotMinter();
+    /// @notice Initial mint of 100 million tokens
+    /// @param _recipient The address to receive the initial mint
+    function initialMint(address _recipient) external checkAddress(_recipient) onlyMinter {
         if (initialMinted) revert AlreadyMinted();
         initialMinted = true;
         _mint(_recipient, 100 * 1e6 * 1e18);
+        emit InitialMinted(_recipient);
     }
 
-    function mint(address account, uint256 amount) external returns (bool) {
-        if (msg.sender != minter) revert NotMinter();
+    /// @notice Mint tokens to an account
+    /// @param account The address to receive the minted tokens
+    /// @param amount The amount of tokens to mint
+    /// @return success Returns true if minting is successful
+    function mint(address account, uint256 amount) external onlyMinter returns (bool) {
         _mint(account, amount);
         return true;
     }
 
+    /// @notice Claim tokens
+    /// @param account The address to receive the claimed tokens
+    /// @param amount The amount of tokens to claim
+    /// @return success Returns true if claiming is successful
     function claim(address account, uint amount) external returns (bool) {
-        if (msg.sender != redemptionReceiver && msg.sender != merkleClaim) {
+        if (msg.sender != merkleClaim) {
             revert ClaimNotAllowed();
         }
         _mint(account, amount);

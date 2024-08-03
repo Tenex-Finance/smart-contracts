@@ -75,11 +75,6 @@ contract Minter is IMinter {
         pendingTeam = _team;
     }
 
-    function setRedemptionReceiver(address _receiver) external {
-        if (msg.sender != team) revert NotTeam();
-        tenex.setRedemptionReceiver(_receiver);
-    }
-
     function setMerkleClaim(address _merkleclaim) external {
         if (msg.sender != team) revert NotTeam();
         tenex.setMerkleClaim(_merkleclaim);

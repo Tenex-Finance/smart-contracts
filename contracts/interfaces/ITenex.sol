@@ -1,20 +1,23 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity 0.8.19;
 
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 interface ITenex is IERC20 {
     error NotMinter();
-    error NotOwner();
     error AlreadyMinted();
     error ClaimNotAllowed();
+    error ZeroAddress();
+
+    event SetMinter(address minter);
+    event SetMerkleClaim(address merkleClaim);
+    event InitialMinted(address recipient);
 
     /// @notice Mint an amount of tokens to an account
     ///         Only callable by Minter.sol
     /// @return True if success
     function mint(address account, uint256 amount) external returns (bool);
 
-    function setRedemptionReceiver(address _receiver) external;
 
     function setMerkleClaim(address _merkleclaim) external;
 
