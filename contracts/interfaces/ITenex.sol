@@ -11,7 +11,6 @@ interface ITenex is IERC20 {
 
     event SetMinter(address minter);
     event SetMerkleClaim(address merkleClaim);
-    event SetRedemptionReceiver(address redemptionReceiver);
     event InitialMinted(address recipient);
 
     /// @notice Mint an amount of tokens to an account
@@ -19,7 +18,6 @@ interface ITenex is IERC20 {
     /// @return True if success
     function mint(address account, uint256 amount) external returns (bool);
 
-    function setRedemptionReceiver(address _receiver) external;
 
     function setMerkleClaim(address _merkleclaim) external;
 

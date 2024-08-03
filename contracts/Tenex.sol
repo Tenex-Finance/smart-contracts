@@ -12,7 +12,6 @@ import {ERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20P
 contract Tenex is ITenex, ERC20Permit {
     address public minter;
     address public merkleClaim;
-    address public redemptionReceiver;
     bool public initialMinted;
 
     constructor() ERC20("Tenex", "TENEX") ERC20Permit("Tenex") {
@@ -29,7 +28,7 @@ contract Tenex is ITenex, ERC20Permit {
         _;
     }
 
-     /// @notice Set the minter address
+    /// @notice Set the minter address
     /// @param _minter The address to set as the minter
     function setMinter(address _minter) external checkAddress(_minter) onlyMinter {
         minter = _minter;
@@ -41,13 +40,6 @@ contract Tenex is ITenex, ERC20Permit {
     function setMerkleClaim(address _merkleClaim) external checkAddress(_merkleClaim) onlyMinter {
         merkleClaim = _merkleClaim;
         emit SetMerkleClaim(merkleClaim);
-    }
-
-    /// @notice Set the redemption receiver address
-    /// @param _receiver The address to set as the redemption receiver
-    function setRedemptionReceiver(address _receiver) external checkAddress(_receiver) onlyMinter {
-        redemptionReceiver = _receiver;
-        emit SetRedemptionReceiver(redemptionReceiver);
     }
 
     /// @notice Initial mint of 100 million tokens
@@ -73,7 +65,7 @@ contract Tenex is ITenex, ERC20Permit {
     /// @param amount The amount of tokens to claim
     /// @return success Returns true if claiming is successful
     function claim(address account, uint amount) external returns (bool) {
-        if (msg.sender != redemptionReceiver && msg.sender != merkleClaim) {
+        if (msg.sender != merkleClaim) {
             revert ClaimNotAllowed();
         }
         _mint(account, amount);

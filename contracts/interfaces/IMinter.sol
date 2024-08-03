@@ -82,13 +82,8 @@ interface IMinter {
     /// @param _team Address of the new team to be chosen
     function setTeam(address _team) external;
 
-    /// @notice set redemptionReceiver address in tenex token 
-    function setRedemptionReceiver(address _receiver) external;
-
-    /// @notice set merkleclaim address in tenex token 
+    /// @notice set merkleclaim address in tenex token
     function setMerkleClaim(address _merkleclaim) external;
-
-
 
     /// @notice Accepts the request to replace the current team's address
     ///         with the requested one, present on variable pendingTeam
