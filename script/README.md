@@ -21,7 +21,7 @@ source .env
 ```
 
 ### Deployment
-- Note that if deploying to a chain other than Blast/Blast Goerli, if you have a different .env variable name used for `RPC_URL`, `SCAN_API_KEY` and `ETHERSCAN_VERIFIER_URL`, you will need to use the corresponding chain name by also updating `foundry.toml`.  For this example we're deploying onto Blast.
+- Note that if deploying to a chain other than Blast/Blast Sepolia, if you have a different .env variable name used for `RPC_URL`, `SCAN_API_KEY` and `ETHERSCAN_VERIFIER_URL`, you will need to use the corresponding chain name by also updating `foundry.toml`.  For this example we're deploying onto Blast.
 
 1. Deploy Tenex Core
 ```
