@@ -9,6 +9,7 @@ contract DeployMockTokens is Base {
     uint256 public deployPrivateKey = vm.envUint("PRIVATE_KEY_DEPLOY");
 
     uint256 public constant INITIAL_SUPPLY = 100_000_000;
+    uint256 public constant MAX_RETRIES = 3;
 
     function run() public {
         _deployTokens();
@@ -19,14 +20,31 @@ contract DeployMockTokens is Base {
         // start broadcasting transactions
         vm.startBroadcast(deployPrivateKey);
 
-        TMOCK[0] = new tMockToken(INITIAL_SUPPLY, "Tenex Usdc", "tUSDC", 6);
-        TMOCK[1] = new tMockToken(INITIAL_SUPPLY, "Tenex Blast", "tBLAST", 18);
-        TMOCK[2] = new tMockToken(INITIAL_SUPPLY, "Tenex Envio", "tENVIO", 18);
-        TMOCK[3] = new tMockToken(INITIAL_SUPPLY, "Tenex OP", "tOP", 18);
-        TMOCK[4] = new tMockToken(INITIAL_SUPPLY, "Tenex Aave", "tAAVE", 18);
-        TMOCK[5] = new tMockToken(INITIAL_SUPPLY, "Tenex Curve", "tCURVE", 18);
-
+        // Deploy tokens with retries and logging
+        _deploySingleToken(0, "Tenex Usdc", "tUSDC", 6);
+        _deploySingleToken(1, "Tenex Blast", "tBLAST", 18);
+        _deploySingleToken(2, "Tenex Envio", "tENVIO", 18);
+        _deploySingleToken(3, "Tenex OP", "tOP", 18);
+        _deploySingleToken(4, "Tenex Aave", "tAAVE", 18);
+        _deploySingleToken(5, "Tenex Curve", "tCURVE", 18);
 
         vm.stopBroadcast();
+    }
+
+    function _deploySingleToken(uint256 index, string memory name, string memory symbol, uint8 decimals) internal {
+        uint256 retries = 0;
+        while (retries < MAX_RETRIES) {
+            try new tMockToken(INITIAL_SUPPLY, name, symbol, decimals) returns (tMockToken token) {
+                TMOCK[index] = token;
+                console.log("Successfully deployed", name, address(token));
+                return;
+            } catch Error(string memory reason) {
+                console.log("Error deploying", name, ":", reason);
+            } catch (bytes memory) {
+                console.log("Error deploying", name);
+            }
+            retries++;
+        }
+        require(retries < MAX_RETRIES, string(abi.encodePacked("Failed to deploy ", name, " after ", MAX_RETRIES, " attempts")));
     }
 }

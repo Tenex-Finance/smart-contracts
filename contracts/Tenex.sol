@@ -42,12 +42,12 @@ contract Tenex is ITenex, ERC20Permit {
         emit SetMerkleClaim(merkleClaim);
     }
 
-    /// @notice Initial mint of 100 million tokens
+    /// @notice Initial mint of 96 million tokens
     /// @param _recipient The address to receive the initial mint
     function initialMint(address _recipient) external checkAddress(_recipient) onlyMinter {
         if (initialMinted) revert AlreadyMinted();
         initialMinted = true;
-        _mint(_recipient, 100 * 1e6 * 1e18);
+        _mint(_recipient, 96 * 1e6 * 1e18);
         emit InitialMinted(_recipient);
     }
 

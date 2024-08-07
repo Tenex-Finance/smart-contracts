@@ -67,7 +67,7 @@ contract TenexTest is BaseTest {
 
         // // Check the final state
         assertEq(token.initialMinted(), true);
-        assertEq(token.balanceOf(recipient), 100 * 1e6 * 1e18);
+        assertEq(token.balanceOf(recipient), 96 * 1e6 * 1e18);
     }
 
     function testFailInitialMintNotMinter() public {
