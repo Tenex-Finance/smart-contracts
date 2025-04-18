@@ -1,30 +1,43 @@
 {
-    "feeManager": "",
     "allowedManager": "",
+    "feeManager": "",
     "emergencyCouncil": "",
     "team": "",
     "vetoer": "",
-    "WETH": "0x4300000000000000000000000000000000000004",
-    "TENEX": "",
-    "merkleRoot": "",
+    "WETH": "",
     "whitelistTokens": [
-        "",
-        ""
+        "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+        "0x4300000000000000000000000000000000000003", 
+        "0x4300000000000000000000000000000000000004", 
+        "0xC4B7846887648B4bef80db245411B0323Edd2a66", 
+        "0xb1a5700fA2358173Fe465e6eA4Ff52E36e88E2ad", 
+        "0xF7bc58b8D8f97ADC129cfC4c9f45Ce3C0E1D2692" 
     ],
     "poolsV2": [
         {
-            "stable": false,
+            "stable": true,
             "tokenA": "",
             "tokenB": ""
         }
+       
     ],
-    "poolsTenex": [
+    "poolsTenexV2": [
         {
-            "stable": false,
-            "token": ""
+            "stable": true,
+            "tokenB": ""
         }
+       
     ],
-    
+    "v1": {
+        "TENEX": "",
+        "VotingEscrow": "",
+        "Voter": "",
+        "Factory": "",
+        "Router": "",
+        "Gov": "",
+        "Distributor": "",
+        "Minter": ""
+    },
     "current": {
         "Forwarder": "",
         "Minter": "",

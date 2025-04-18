@@ -27,25 +27,25 @@ contract Minter is IMinter {
     /// @inheritdoc IMinter
     uint256 public constant WEEK = 1 weeks;
     /// @inheritdoc IMinter
-    uint256 public constant WEEKLY_DECAY = 9_900;
+    uint256 public constant WEEKLY_DECAY = 9_925;
     /// @inheritdoc IMinter
-    uint256 public constant MAXIMUM_TAIL_RATE = 100;
+    uint256 public constant MAXIMUM_TAIL_RATE = 0;
     /// @inheritdoc IMinter
-    uint256 public constant MINIMUM_TAIL_RATE = 1;
+    uint256 public constant MINIMUM_TAIL_RATE = 0;
     /// @inheritdoc IMinter
     uint256 public constant MAX_BPS = 10_000;
     /// @inheritdoc IMinter
     uint256 public constant NUDGE = 1;
     /// @inheritdoc IMinter
-    uint256 public constant TAIL_START = 6_000_000 * 1e18;
+    uint256 public constant TAIL_START = 0 ;
     /// @inheritdoc IMinter
     uint256 public constant MAXIMUM_TEAM_RATE = 500;
     /// @inheritdoc IMinter
-    uint256 public teamRate = 500; // team emissions start at 5%
+    uint256 public teamRate = 0; // team emissions start at 5%
     /// @inheritdoc IMinter
-    uint256 public tailEmissionRate = 30;
+    uint256 public tailEmissionRate = 0;
     /// @inheritdoc IMinter
-    uint256 public weekly = 15_000_000 * 1e18;
+    uint256 public weekly = 2_250_000 * 1e18;
     /// @inheritdoc IMinter
     uint256 public activePeriod;
     /// @inheritdoc IMinter
