@@ -6,7 +6,7 @@
     "vetoer": "0x81dB4E84Ce4aD748Ac7734B0aAd2f4779be7339c",
     "WETH": "0x4300000000000000000000000000000000000004",
     "TENEX": "0xC4B7846887648B4bef80db245411B0323Edd2a66",
-    "merkleRoot": "0xd883c64634519cc6d474926ea13ddad23125b29787bb25178e132f9ceb670efa",
+    "merkleRoot": "0x",
     "whitelistTokens": [
         "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
         "0x4300000000000000000000000000000000000003", 
