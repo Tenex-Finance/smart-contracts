@@ -1,10 +1,12 @@
 {
-    "allowedManager": "",
-    "feeManager": "",
-    "emergencyCouncil": "",
-    "team": "",
-    "vetoer": "",
-    "WETH": "",
+    "feeManager": "0x81dB4E84Ce4aD748Ac7734B0aAd2f4779be7339c",
+    "allowedManager": "0x81dB4E84Ce4aD748Ac7734B0aAd2f4779be7339c",
+    "emergencyCouncil": "0x6f28c805035Ca31FD26f78e18a90648A18C613EA",
+    "team": "0x81dB4E84Ce4aD748Ac7734B0aAd2f4779be7339c",
+    "vetoer": "0x81dB4E84Ce4aD748Ac7734B0aAd2f4779be7339c",
+    "WETH": "0x4300000000000000000000000000000000000004",
+    "TENEX": "0xC4B7846887648B4bef80db245411B0323Edd2a66",
+    "merkleRoot": "0xd883c64634519cc6d474926ea13ddad23125b29787bb25178e132f9ceb670efa",
     "whitelistTokens": [
         "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
         "0x4300000000000000000000000000000000000003", 
@@ -15,29 +17,18 @@
     ],
     "poolsV2": [
         {
-            "stable": true,
-            "tokenA": "",
-            "tokenB": ""
+            "stable": false,
+            "tokenA": "0xb1a5700fA2358173Fe465e6eA4Ff52E36e88E2ad",
+            "tokenB": "0x4300000000000000000000000000000000000003"
         }
-       
     ],
-    "poolsTenexV2": [
+    "poolsTenex": [
         {
-            "stable": true,
-            "tokenB": ""
+            "stable": false,
+            "token": "0x4300000000000000000000000000000000000003"
         }
-       
     ],
-    "v1": {
-        "TENEX": "",
-        "VotingEscrow": "",
-        "Voter": "",
-        "Factory": "",
-        "Router": "",
-        "Gov": "",
-        "Distributor": "",
-        "Minter": ""
-    },
+    
     "current": {
         "Forwarder": "",
         "Minter": "",
