@@ -1,12 +1,12 @@
 {
-    "feeManager": "0x81dB4E84Ce4aD748Ac7734B0aAd2f4779be7339c",
-    "allowedManager": "0x81dB4E84Ce4aD748Ac7734B0aAd2f4779be7339c",
+    "feeManager": "0x52C088471a995B3fa4d8BF5ec845e75249A46556",
+    "allowedManager": "0x52C088471a995B3fa4d8BF5ec845e75249A46556",
     "emergencyCouncil": "0x6f28c805035Ca31FD26f78e18a90648A18C613EA",
-    "team": "0x81dB4E84Ce4aD748Ac7734B0aAd2f4779be7339c",
-    "vetoer": "0x81dB4E84Ce4aD748Ac7734B0aAd2f4779be7339c",
+    "team": "0x52C088471a995B3fa4d8BF5ec845e75249A46556",
+    "vetoer": "0x52C088471a995B3fa4d8BF5ec845e75249A46556",
     "WETH": "0x4300000000000000000000000000000000000004",
     "TENEX": "0xC4B7846887648B4bef80db245411B0323Edd2a66",
-    "merkleRoot": "0x",
+    "merkleRoot": "",
     "whitelistTokens": [
         "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
         "0x4300000000000000000000000000000000000003", 
@@ -30,9 +30,9 @@
     ],
     
     "current": {
-        "Forwarder": "",
-        "Minter": "",
-        "VotingEscrow": "",
-        "Voter": ""
+        "Forwarder": "0x414Cf302F001a3Cff313EbfA07C317Fe548D03ad",
+        "Minter": "0xe20086E01FF1382332cf72c53D2bF5014bA1fBbe",
+        "VotingEscrow": "0xfec8C7a0129cFCad689682C972b817C549f593b6",
+        "Voter": "0xDaE876Af086d7E2ee2CF5434faAB6DD54732BcA5"
     }
 }

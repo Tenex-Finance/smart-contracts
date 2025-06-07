@@ -14,7 +14,6 @@ export default {
       url: `${process.env.BLAST_RPC_URL}`,
       accounts: [`${process.env.PRIVATE_KEY_DEPLOY}`],
       gasPrice : 1000000
-      chai
 
     },
   },

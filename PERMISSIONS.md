@@ -18,7 +18,7 @@
     - Earns TENEX emissions
 
 ### veNFT Hodler
-- For a detailed breakdown refer to [VOTINGESCROW.md](https://github.com/Tenex-finance/contracts/blob/contracts-v2/VOTINGESCROW.md)
+- For a detailed breakdown refer to [VOTINGESCROW.md](https://github.com/Tenex-Finance/smart-contracts/tree/master/VOTINGESCROW.md)
 
 #### Normal, Normal Permanent, and Managed veNFT
 - Can approve/revoke an address to modify the veNFT
@@ -51,12 +51,12 @@
 ### Who
 
 #### Tenex Team
- Multisig at [0xBA4BB89f4d1E66AA86B60696534892aE0cCf91F5](https://optimistic.etherscan.io/address/0xBA4BB89f4d1E66AA86B60696534892aE0cCf91F5)
+ Multisig at []()
 - Threshold: 3/7
 - TODO: Who owns every address?
 
 #### EmergencyCouncil
-Multisig at [0x838352F4E3992187a33a04826273dB3992Ee2b3f](https://optimistic.etherscan.io/address/0x838352F4E3992187a33a04826273dB3992Ee2b3f)
+Multisig at []()
 - Threshold: 5/6
 - TODO: Who owns every address?
 
@@ -84,19 +84,19 @@ Tenex team
 ## Permissions List
 This is an exhaustive list of all admin permissions in Tenex V2, sorted by the contract they are stored in.
 
-#### [PoolFactory](https://optimistic.etherscan.io/address/0xF1046053aa5682b4F9a81b5481394DA16BE5FF5a#code)
+#### [PoolFactory](https://blastscan.io/address/0x9FC1091Bf704F2a74399E2ae98517202cab821b6#code)
 - Pauser
     - Controls pause state of swaps on UniswapV2 pools created by this factory.  Users are still freely able to add/remove liquidity
     - Can set Pauser role
 - FeeManager
     - Controls default and custom fees for stable / volatile pools.
 
-#### [FactoryRegistry](https://optimistic.etherscan.io/address/0xF4c67CdEAaB8360370F41514d06e32CcD8aA1d7B#code)
+#### [FactoryRegistry](https://blastscan.io/address/0x09B40a2d9091B985849AAf86EebFDcad3F106268#code)
 - Owner
     - Can approve / unapprove new pool / gauge / reward factory combinations.
     - This is used to add new pools, gauges or reward factory combinations. These new pools / gauges / rewards factories may have different code to existing implementations.
 
-#### [Minter](https://optimistic.etherscan.io/address/0x6dc9E1C04eE59ed3531d73a72256C0da46D10982#code)
+#### [Minter](https://blastscan.io/address/0xe20086E01FF1382332cf72c53D2bF5014bA1fBbe#code)
 - Team
     - Can set PendingTeam in Minter
     - Can accept itself as team in Minter (requires being set as pendingTeam by previous team)
@@ -104,7 +104,7 @@ This is an exhaustive list of all admin permissions in Tenex V2, sorted by the c
 - EpochGovernor
     - Can nudge the Minter to adjust the TENEX emissions rate.
 
-#### [TENEXGovernor](TODO: live etherscan link)
+#### [TENEXGovernor](TODO: live blastsacan link)
 - Team
     - Can set proposal numerator.
 - Vetoer
@@ -116,7 +116,7 @@ This is an exhaustive list of all admin permissions in Tenex V2, sorted by the c
 - Team
     - Can deposit additional emissions into a gauge.
 
-#### [Voter](https://optimistic.etherscan.io/address/0x41C914ee0c7E1A5edCD0295623e6dC557B5aBf3C#code)
+#### [Voter](https://blastscan.io/address/0xDaE876Af086d7E2ee2CF5434faAB6DD54732BcA5#code)
 - Governor
     - Can set governor in Voter.
     - Can set epochGovernor in Voter.
@@ -136,7 +136,7 @@ This is an exhaustive list of all admin permissions in Tenex V2, sorted by the c
     - Can set a custom name or symbol for a Uniswap V2 pool.
     - Can activate or deactivate managed NFTs in VotingEscrow.
 
-#### [VotingEscrow](https://optimistic.etherscan.io/address/0xFAf8FD17D9840595845582fCB047DF13f006787d#code)
+#### [VotingEscrow](https://blastscan.io/address/0xfec8C7a0129cFCad689682C972b817C549f593b6#code)
 - Team
     - Can set team in VotingEscrow
     - Can set artProxy in VotingEscrow.
