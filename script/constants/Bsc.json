@@ -1,0 +1,38 @@
+{
+    "feeManager": "0x52C088471a995B3fa4d8BF5ec845e75249A46556",
+    "allowedManager": "0x52C088471a995B3fa4d8BF5ec845e75249A46556",
+    "emergencyCouncil": "0x6f28c805035Ca31FD26f78e18a90648A18C613EA",
+    "team": "0x52C088471a995B3fa4d8BF5ec845e75249A46556",
+    "vetoer": "0x52C088471a995B3fa4d8BF5ec845e75249A46556",
+    "WETH": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "TENEX": "0xA5d4F9862349b8F7967F3CE8D4db742449364bB1",
+    "merkleRoot": "",
+    "whitelistTokens": [
+        "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+        "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c", 
+        "0x55d398326f99059fF775485246999027B3197955", 
+        "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
+        "0xA5d4F9862349b8F7967F3CE8D4db742449364bB1"
+        
+    ],
+    "poolsV2": [
+        {
+            "stable": false,
+            "tokenA": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+            "tokenB": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d"
+        }
+    ],
+    "poolsTenex": [
+        {
+            "stable": false,
+            "token": "0x55d398326f99059fF775485246999027B3197955"
+        }
+    ],
+    
+    "current": {
+        "Forwarder": "",
+        "Minter": "",
+        "VotingEscrow": "",
+        "Voter": ""
+    }
+}

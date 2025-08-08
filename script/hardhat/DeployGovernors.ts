@@ -1,6 +1,6 @@
 import { deploy } from "./utils/helpers";
 import { TenexGovernor, EpochGovernor } from "../../artifacts/types";
-import jsonConstants from "../constants/Blast.json";
+import jsonConstants from "../constants/Bsc.json";
 import deployedContracts from "../constants/output/TenexOutput2.json";
 import {join} from "path";
 import { writeFile } from "fs/promises";

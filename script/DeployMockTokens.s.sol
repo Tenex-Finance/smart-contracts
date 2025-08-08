@@ -22,7 +22,7 @@ contract DeployMockTokens is Base {
 
         // Deploy tokens with retries and logging
         _deploySingleToken(0, "Tenex Usdc", "tUSDC", 6);
-        _deploySingleToken(1, "Tenex Blast", "tBLAST", 18);
+        _deploySingleToken(1, "Tenex Bsc", "tBSC", 18);
         _deploySingleToken(2, "Tenex Envio", "tENVIO", 18);
         _deploySingleToken(3, "Tenex OP", "tOP", 18);
         _deploySingleToken(4, "Tenex Aave", "tAAVE", 18);

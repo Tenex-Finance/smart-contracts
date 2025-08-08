@@ -19,7 +19,7 @@ import {
   TenexForwarder,
   MerkleClaim,
 } from "../../artifacts/types";
-import jsonConstants from "../constants/Blast.json";
+import jsonConstants from "../constants/Bsc.json";
 
 interface TenexOutput {
   artProxy: string;

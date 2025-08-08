@@ -47,7 +47,7 @@ contract Tenex is ITenex, ERC20Permit {
     function initialMint(address _recipient) external checkAddress(_recipient) onlyMinter {
         if (initialMinted) revert AlreadyMinted();
         initialMinted = true;
-        _mint(_recipient, 96 * 1e6 * 1e18);
+        _mint(_recipient, 100 * 1e6 * 1e18);
         emit InitialMinted(_recipient);
     }
 
@@ -64,7 +64,7 @@ contract Tenex is ITenex, ERC20Permit {
     /// @param account The address to receive the claimed tokens
     /// @param amount The amount of tokens to claim
     /// @return success Returns true if claiming is successful
-    function claim(address account, uint amount) external returns (bool) {
+    function claim(address account, uint256 amount) external returns (bool) {
         if (msg.sender != merkleClaim) {
             revert ClaimNotAllowed();
         }

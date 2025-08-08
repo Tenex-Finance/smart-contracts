@@ -1,6 +1,6 @@
 import { getContractAt } from "./utils/helpers";
 import { PoolFactory, Voter } from "../../artifacts/types";
-import jsonConstants from "../constants/Blast.json";
+import jsonConstants from "../constants/Bsc.json";
 import { join } from "path";
 import deployedContracts from "../constants/output/TenexOutput2.json";
 import { writeFile } from "fs/promises";

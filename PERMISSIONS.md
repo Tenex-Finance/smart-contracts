@@ -84,19 +84,19 @@ Tenex team
 ## Permissions List
 This is an exhaustive list of all admin permissions in Tenex V2, sorted by the contract they are stored in.
 
-#### [PoolFactory](https://blastscan.io/address/0x9FC1091Bf704F2a74399E2ae98517202cab821b6#code)
+#### [PoolFactory](https://bscscan.com/address/0x9FC1091Bf704F2a74399E2ae98517202cab821b6#code)
 - Pauser
     - Controls pause state of swaps on UniswapV2 pools created by this factory.  Users are still freely able to add/remove liquidity
     - Can set Pauser role
 - FeeManager
     - Controls default and custom fees for stable / volatile pools.
 
-#### [FactoryRegistry](https://blastscan.io/address/0x09B40a2d9091B985849AAf86EebFDcad3F106268#code)
+#### [FactoryRegistry](https://bscscan.com/address/0x09B40a2d9091B985849AAf86EebFDcad3F106268#code)
 - Owner
     - Can approve / unapprove new pool / gauge / reward factory combinations.
     - This is used to add new pools, gauges or reward factory combinations. These new pools / gauges / rewards factories may have different code to existing implementations.
 
-#### [Minter](https://blastscan.io/address/0xe20086E01FF1382332cf72c53D2bF5014bA1fBbe#code)
+#### [Minter](https://bscscan.com/address/0xe20086E01FF1382332cf72c53D2bF5014bA1fBbe#code)
 - Team
     - Can set PendingTeam in Minter
     - Can accept itself as team in Minter (requires being set as pendingTeam by previous team)
@@ -104,7 +104,7 @@ This is an exhaustive list of all admin permissions in Tenex V2, sorted by the c
 - EpochGovernor
     - Can nudge the Minter to adjust the TENEX emissions rate.
 
-#### [TENEXGovernor](TODO: live blastsacan link)
+#### [TENEXGovernor](TODO: live bscsacan link)
 - Team
     - Can set proposal numerator.
 - Vetoer
@@ -116,7 +116,7 @@ This is an exhaustive list of all admin permissions in Tenex V2, sorted by the c
 - Team
     - Can deposit additional emissions into a gauge.
 
-#### [Voter](https://blastscan.io/address/0xDaE876Af086d7E2ee2CF5434faAB6DD54732BcA5#code)
+#### [Voter](https://bscscan.com/address/0xDaE876Af086d7E2ee2CF5434faAB6DD54732BcA5#code)
 - Governor
     - Can set governor in Voter.
     - Can set epochGovernor in Voter.
@@ -136,7 +136,7 @@ This is an exhaustive list of all admin permissions in Tenex V2, sorted by the c
     - Can set a custom name or symbol for a Uniswap V2 pool.
     - Can activate or deactivate managed NFTs in VotingEscrow.
 
-#### [VotingEscrow](https://blastscan.io/address/0xfec8C7a0129cFCad689682C972b817C549f593b6#code)
+#### [VotingEscrow](https://bscscan.com/address/0xfec8C7a0129cFCad689682C972b817C549f593b6#code)
 - Team
     - Can set team in VotingEscrow
     - Can set artProxy in VotingEscrow.

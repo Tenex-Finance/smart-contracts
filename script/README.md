@@ -4,7 +4,7 @@ Tenex deployment is a multi-step process.  Unlike testing, we cannot impersonate
 
 ### Environment setup
 1. Copy-pasta `.env.sample` into a new `.env` and set the environment variables. `PRIVATE_KEY_DEPLOY` is the private key to deploy all scripts.
-2. Copy-pasta `script/constants/TEMPLATE.json` into a new file `script/constants/{CONSTANTS_FILENAME}`. For example, "Blast.json" in the .env would be a file of `script/constants/Blast.json`.  Set the variables in the new file.
+2. Copy-pasta `script/constants/TEMPLATE.json` into a new file `script/constants/{CONSTANTS_FILENAME}`. For example, "Bsc.json" in the .env would be a file of `script/constants/Bsc.json`.  Set the variables in the new file.
 
 3. Run tests to ensure deployment state is configured correctly:
 ```ml
@@ -21,17 +21,17 @@ source .env
 ```
 
 ### Deployment
-- Note that if deploying to a chain other than Blast/Blast Sepolia, if you have a different .env variable name used for `RPC_URL`, `SCAN_API_KEY` and `ETHERSCAN_VERIFIER_URL`, you will need to use the corresponding chain name by also updating `foundry.toml`.  For this example we're deploying onto Blast.
+- Note that if deploying to a chain other than Bsc/Bsc, if you have a different .env variable name used for `RPC_URL`, `SCAN_API_KEY` and `ETHERSCAN_VERIFIER_URL`, you will need to use the corresponding chain name by also updating `foundry.toml`.  For this example we're deploying onto Bsc.
 
 1. Deploy Tenex Core
 ```
-forge script script/DeployTenex.s.sol:DeployTenex --broadcast --slow --rpc-url blast --verify -vvvv
+forge script script/DeployTenex.s.sol:DeployTenexToken --broadcast --slow --rpc-url Bsc --verify -vvvv
 ```
 2. Accept pending team as team. This needs to be done by the `minter.pendingTeam()` address. Within the deployed `Minter` contract call `acceptTeam()`.
 
 3. Deploy  gauges and  pools.  These gauges are built on Tenex using newly created  pools.
 ```
-forge script script/DeployGaugesAndPools.s.sol:DeployGaugesAndPools --broadcast --slow --rpc-url blast --verify -vvvv
+forge script script/DeployGaugesAndPools.s.sol:DeployGaugesAndPools --broadcast --slow --rpc-url Bsc --verify -vvvv
 ```
 
 4. Deploy governor contracts. From the above output of 1, copy the forwarder, minter and voting escrow addresses into your constants file under the key "current":
@@ -48,7 +48,7 @@ e.g.
 This is done as a sanity check in the event that the governor is not deployed alongside the rest of the contracts so that the governor will always be pointing to valid contracts. 
 
 ```
-forge script script/DeployGovernors.s.sol:DeployGovernors --broadcast --slow --rpc-url blast --verify -vvvv
+forge script script/DeployGovernors.s.sol:DeployGovernors --broadcast --slow --rpc-url Bsc --verify -vvvv
 ```
 
 5.  Update the governor addresses on .  This needs to be done by the  `Voter.governor()` address.  Within  `voter`:
