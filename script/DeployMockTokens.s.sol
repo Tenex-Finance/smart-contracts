@@ -45,6 +45,9 @@ contract DeployMockTokens is Base {
             }
             retries++;
         }
-        require(retries < MAX_RETRIES, string(abi.encodePacked("Failed to deploy ", name, " after ", MAX_RETRIES, " attempts")));
+        require(
+            retries < MAX_RETRIES,
+            string(abi.encodePacked("Failed to deploy ", name, " after ", MAX_RETRIES, " attempts"))
+        );
     }
 }

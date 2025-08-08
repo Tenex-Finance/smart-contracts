@@ -44,7 +44,6 @@ async function main() {
 
   const merkleRoot = jsonConstants.merkleRoot;
 
-
   const TENEX = await getContractAt<Tenex>("Tenex", TENEX_ADDRESS);
 
   jsonConstants.whitelistTokens.push(TENEX_ADDRESS);
@@ -147,8 +146,7 @@ async function main() {
     undefined,
     TENEX_ADDRESS,
     merkleRoot
-  )
-  
+  );
 
   const minter = await deploy<Minter>(
     "Minter",
@@ -164,10 +162,10 @@ async function main() {
   await TENEX.initialMint(jsonConstants.team);
 
   await TENEX.setMerkleClaim(merkleClaim.address);
-  
+
   await TENEX.setMinter(minter.address);
-  
-  // Initialize 
+
+  // Initialize
   await voter.initialize(jsonConstants.whitelistTokens, minter.address);
   // ====== end _coreSetup() ======
 

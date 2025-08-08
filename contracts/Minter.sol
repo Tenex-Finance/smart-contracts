@@ -37,7 +37,7 @@ contract Minter is IMinter {
     /// @inheritdoc IMinter
     uint256 public constant NUDGE = 1;
     /// @inheritdoc IMinter
-    uint256 public constant TAIL_START = 0 ;
+    uint256 public constant TAIL_START = 0;
     /// @inheritdoc IMinter
     uint256 public constant MAXIMUM_TEAM_RATE = 500;
     /// @inheritdoc IMinter

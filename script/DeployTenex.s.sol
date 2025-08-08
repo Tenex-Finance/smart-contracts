@@ -68,7 +68,7 @@ contract DeployTenex is Base {
 
         tokens.push(address(TENEX));
 
-        TENEX.setMerkleClaim(address(merkleClaim));// need to verify ; placement of this transaction
+        TENEX.setMerkleClaim(address(merkleClaim)); // need to verify ; placement of this transaction
     }
 
     function _deploySetupAfter() public {
@@ -85,7 +85,7 @@ contract DeployTenex is Base {
         factory.setFeeManager(feeManager);
         factory.setVoter(address(voter));
 
-        minter.acceptTeam();// need to verify
+        minter.acceptTeam(); // need to verify
 
         // finish broadcasting transactions
         vm.stopBroadcast();

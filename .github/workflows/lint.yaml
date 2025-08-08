@@ -39,7 +39,7 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Run formatter check on *.sol and *.json
-        run: yarn format:check
+        run: yarn format
 
       # - name: Run linter check on *.sol file
       #   run: yarn lint

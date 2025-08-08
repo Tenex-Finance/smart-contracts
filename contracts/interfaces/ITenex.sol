@@ -18,7 +18,6 @@ interface ITenex is IERC20 {
     /// @return True if success
     function mint(address account, uint256 amount) external returns (bool);
 
-
     function setMerkleClaim(address _merkleclaim) external;
 
     function claim(address account, uint amount) external returns (bool);
