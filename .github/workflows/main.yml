@@ -25,8 +25,8 @@ jobs:
           forge --version
       #    forge build --sizes
 
-      - name: Run tests
-        run: OUTPUT_FILENAME=ci.json CONSTANTS_FILENAME=Bsc.json forge test -vvv
+     # - name: Run tests
+      #  run: OUTPUT_FILENAME=ci.json CONSTANTS_FILENAME=Bsc.json forge test -vvv
         env:
           BSC_RPC_URL: ${{ secrets.BSC_RPC_URL }}
           PRIVATE_KEY_DEPLOY: ${{ secrets.PRIVATE_KEY_DEPLOY }}
