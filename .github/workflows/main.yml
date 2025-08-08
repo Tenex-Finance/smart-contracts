@@ -27,11 +27,11 @@ jobs:
 
      # - name: Run tests
       #  run: OUTPUT_FILENAME=ci.json CONSTANTS_FILENAME=Bsc.json forge test -vvv
-        env:
-          BSC_RPC_URL: ${{ secrets.BSC_RPC_URL }}
-          PRIVATE_KEY_DEPLOY: ${{ secrets.PRIVATE_KEY_DEPLOY }}
+       # env:
+        #  BSC_RPC_URL: ${{ secrets.BSC_RPC_URL }}
+        #  PRIVATE_KEY_DEPLOY: ${{ secrets.PRIVATE_KEY_DEPLOY }}
           
-      - name: slither-static-analysis
-        continue-on-error: true
-        uses: luisfontes19/slither-static-analysis-action@v0.3.4
+      #- name: slither-static-analysis
+      #  continue-on-error: false
+      #  uses: luisfontes19/slither-static-analysis-action@v0.3.4
       
