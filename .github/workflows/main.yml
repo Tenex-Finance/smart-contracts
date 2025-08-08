@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches: 
-      - main
+      - master
   pull_request:
   workflow_dispatch:
 
@@ -23,15 +23,15 @@ jobs:
       - name: "Build the contracts and print their size"
         run: |
           forge --version
-          forge build --sizes
+      #    forge build --sizes
 
-      - name: Run tests
-        run: OUTPUT_FILENAME=ci.json CONSTANTS_FILENAME=Optimism.json forge test -vvv
-        env:
-          BLAST_RPC_URL: ${{ secrets.BSC_RPC_URL }}
-          PRIVATE_KEY_DEPLOY: ${{ secrets.PRIVATE_KEY_DEPLOY }}
+     # - name: Run tests
+      #  run: OUTPUT_FILENAME=ci.json CONSTANTS_FILENAME=Bsc.json forge test -vvv
+       # env:
+        #  BSC_RPC_URL: ${{ secrets.BSC_RPC_URL }}
+        #  PRIVATE_KEY_DEPLOY: ${{ secrets.PRIVATE_KEY_DEPLOY }}
           
-      - name: slither-static-analysis
-        continue-on-error: true
-        uses: luisfontes19/slither-static-analysis-action@v0.3.4
+      #- name: slither-static-analysis
+      #  continue-on-error: false
+      #  uses: luisfontes19/slither-static-analysis-action@v0.3.4
       

@@ -14,8 +14,7 @@ contract DeployMerkleClaim is Base {
 
     address public deployerAddress = vm.addr(deployPrivateKey);
 
-    bytes32 public merkleRoot = 0xbd6c68af958c9ab9df815558f13d83a60119d22cd81df06da12f49da30481ec8;
-
+    bytes32 public merkleRoot = "";
     string public constantsFilename = vm.envString("CONSTANTS_FILENAME");
     string public outputFilename = vm.envString("OUTPUT_FILENAME");
     string public jsonConstants;

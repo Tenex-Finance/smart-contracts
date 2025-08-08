@@ -1,6 +1,6 @@
 import { getContractAt } from "./utils/helpers";
 import { PoolFactory, Voter } from "../../artifacts/types";
-import jsonConstants from "../constants/Blast.json";
+import jsonConstants from "../constants/Bsc.json";
 import { join } from "path";
 import deployedContracts from "../constants/output/TenexOutput2.json";
 import { writeFile } from "fs/promises";
@@ -12,8 +12,8 @@ async function main() {
   );
   const voter = await getContractAt<Voter>("Voter", deployedContracts.voter);
 
-  let poolsV2: string[]=[];
-  let gaugesPoolsV2: string[]=[];
+  let poolsV2: string[] = [];
+  let gaugesPoolsV2: string[] = [];
 
   // Deploy non-TENEX pools and gauges
   for (var i = 0; i < jsonConstants.poolsV2.length; i++) {
@@ -37,16 +37,12 @@ async function main() {
       pool[0],
       { gasLimit: 5000000 }
     );
-    
-    let gauge = await voter.functions["gauges(address)"](
-      pool[0],
-      {
-        gasLimit: 5000000,
-      }
-    );
-    poolsV2.push(pool[0])
-    gaugesPoolsV2.push(gauge[0])
 
+    let gauge = await voter.functions["gauges(address)"](pool[0], {
+      gasLimit: 5000000,
+    });
+    poolsV2.push(pool[0]);
+    gaugesPoolsV2.push(gauge[0]);
   }
 
   // Deploy TENEX pools and gauges
@@ -73,34 +69,31 @@ async function main() {
       pool[0],
       { gasLimit: 5000000 }
     );
-    let gauge = await voter.functions["gauges(address)"](
-      pool[0],
-      {
-        gasLimit: 5000000,
-      }
-    );
-    poolsV2.push(pool[0])
-    gaugesPoolsV2.push(gauge[0])
+    let gauge = await voter.functions["gauges(address)"](pool[0], {
+      gasLimit: 5000000,
+    });
+    poolsV2.push(pool[0]);
+    gaugesPoolsV2.push(gauge[0]);
   }
 
   const outputDirectory = "script/constants/output";
-  const outputFile = join(process.cwd(), outputDirectory, "TenexOutputPools2.json");
+  const outputFile = join(
+    process.cwd(),
+    outputDirectory,
+    "TenexOutputPools2.json"
+  );
 
   let output = {
-    poolsV2 : poolsV2,
-    gaugesPoolsV2: gaugesPoolsV2
-  }
+    poolsV2: poolsV2,
+    gaugesPoolsV2: gaugesPoolsV2,
+  };
 
   try {
     await writeFile(outputFile, JSON.stringify(output, null, 2));
   } catch (err) {
     console.error(`Error writing output file: ${err}`);
   }
-
-
 }
-
-
 
 main().catch((error) => {
   console.error(error);

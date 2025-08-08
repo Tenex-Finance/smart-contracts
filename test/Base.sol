@@ -52,7 +52,6 @@ abstract contract Base is Script, Test {
     // mock tokens
     tMockToken[6] public TMOCK;
 
-
     address[] public tokens;
 
     /// @dev Core v2 Deployment

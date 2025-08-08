@@ -22,7 +22,6 @@ contract MerkleClaimTest is BaseTest {
         merkleClaim = new MerkleClaim(address(TENEX), merkleRoot);
     }
 
-
     //@Todo
     // function testClaim() public {
     //     // Create a proof for the claimer

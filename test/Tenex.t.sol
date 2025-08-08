@@ -35,7 +35,7 @@ contract TenexTest is BaseTest {
     }
 
     // Zero Address checks
-     function testSetMinterZeroAddress() public {
+    function testSetMinterZeroAddress() public {
         vm.expectRevert(ITenex.ZeroAddress.selector);
         token.setMinter(address(0));
     }
@@ -99,7 +99,6 @@ contract TenexTest is BaseTest {
         assertEq(token.balanceOf(user), 2000);
         assertEq(token.totalSupply(), 2000);
     }
-
 
     function testClaimByUnauthorizedAddress() public {
         vm.prank(user);

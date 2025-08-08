@@ -7,7 +7,6 @@ import {ERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20P
 contract tMockToken is ERC20Permit {
     address private owner;
     uint8 private _decimals;
-    
 
     struct UserStatus {
         uint256 lastClaimed;
@@ -17,7 +16,12 @@ contract tMockToken is ERC20Permit {
     mapping(address => UserStatus) claimStatus;
     uint256 public constant MAX_LIMIT = 10_000;
 
-    constructor(uint256 initialSupply_,string memory name_, string memory symbol_, uint256 decimals_) ERC20(name_, symbol_) ERC20Permit(name_) {
+    constructor(
+        uint256 initialSupply_,
+        string memory name_,
+        string memory symbol_,
+        uint256 decimals_
+    ) ERC20(name_, symbol_) ERC20Permit(name_) {
         owner = msg.sender;
         _decimals = uint8(decimals_);
         _mint(msg.sender, initialSupply_ * 10 ** _decimals);
@@ -45,6 +49,6 @@ contract tMockToken is ERC20Permit {
     function mintTo(address _recipient, uint256 _amount) external {
         require(msg.sender == owner, "Not Allowed");
 
-        _mint(_recipient, _amount* 10 ** _decimals);
+        _mint(_recipient, _amount * 10 ** _decimals);
     }
 }

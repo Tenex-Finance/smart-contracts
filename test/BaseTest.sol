@@ -57,9 +57,9 @@ abstract contract BaseTest is Base, TestOwner {
 
     SigUtils sigUtils;
 
-    uint256 blastFork;
-    /// @dev set BLAST_RPC_URL in .env to run mainnet tests
-    string BLAST_RPC_URL = vm.envString("BLAST_RPC_URL");
+    uint256 bscFork;
+    /// @dev set BSC_RPC_URL in .env to run mainnet tests
+    string BSC_RPC_URL = vm.envString("BSC_RPC_URL");
     /// @dev optionally set FORK_BLOCK_NUMBER in .env / test set up for faster tests / fixed tests
     uint256 BLOCK_NUMBER = vm.envOr("FORK_BLOCK_NUMBER", uint256(0));
 
@@ -194,11 +194,11 @@ abstract contract BaseTest is Base, TestOwner {
 
     function _forkSetupBefore() public {
         if (BLOCK_NUMBER != 0) {
-            blastFork = vm.createFork(BLAST_RPC_URL, BLOCK_NUMBER);
+            bscFork = vm.createFork(BSC_RPC_URL, BLOCK_NUMBER);
         } else {
-            blastFork = vm.createFork(BLAST_RPC_URL);
+            bscFork = vm.createFork(BSC_RPC_URL);
         }
-        vm.selectFork(blastFork);
+        vm.selectFork(bscFork);
     }
 
     function deployOwners() public {
