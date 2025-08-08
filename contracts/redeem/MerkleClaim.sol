@@ -45,11 +45,7 @@ contract MerkleClaim {
     /// @param to address of claimee
     /// @param amount of tokens owed to claimee
     /// @param proof merkle proof to prove address and amount are in tree
-    function claim(
-        address to,
-        uint256 amount,
-        bytes32[] calldata proof
-    ) external {
+    function claim(address to, uint256 amount, bytes32[] calldata proof) external {
         // Throw if address has already claimed tokens
         require(!hasClaimed[to], "ALREADY_CLAIMED");
 

@@ -48,8 +48,8 @@ contract DeployGovernors is Script {
         governor.setVetoer(vetoer);
         governor.setTeam(team);
 
-        voter.setEpochGovernor(address(epochGovernor));// by the team need to verify
-        voter.setGovernor(address(governor));// by the team need to verify
+        voter.setEpochGovernor(address(epochGovernor)); // by the team need to verify
+        voter.setGovernor(address(governor)); // by the team need to verify
 
         governor.acceptVetoer();
         governor.acceptTeam();

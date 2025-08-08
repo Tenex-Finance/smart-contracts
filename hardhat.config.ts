@@ -1,21 +1,33 @@
 import * as dotenv from "dotenv";
-import * as tdly from "@tenderly/hardhat-tenderly";
-import "@nomicfoundation/hardhat-toolbox";
+import * as tdly from "@tenderly/hardhat-tenderly"; //Cannot find module '@tenderly/hardhat-tenderly' or its corresponding type declarations.
+//import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-foundry";
+import "@nomicfoundation/hardhat-verify"; // ✅ new verification plugin
 
 dotenv.config();
-tdly.setup({ automaticVerifications: false });
 
 export default {
-  defaultNetwork: "tenderly",
+  defaultNetwork: "bsc",
   networks: {
     hardhat: {},
-    blast: {
-      url: `${process.env.BLAST_RPC_URL}`,
-      accounts: [`${process.env.PRIVATE_KEY_DEPLOY}`],
-      gasPrice : 1000000
-
+    bsc: {
+      url: process.env.BSC_RPC_URL,
+      accounts: [process.env.PRIVATE_KEY_DEPLOY],
+      gasPrice: 1000000
     },
+  },
+  etherscan: {
+    apiKey: process.env.BSC_SCAN_API_KEY, // ✅ Etherscan V2 key
+    customChains: [
+      {
+        network: "bsc",
+        chainId: 56,
+        urls: {
+          apiURL: process.env.BSC_ETHERSCAN_VERIFIER_URL,
+          browserURL: "https://bscscan.com"
+        }
+      }
+    ]
   },
   solidity: {
     version: "0.8.19",
@@ -25,11 +37,6 @@ export default {
         runs: 200,
       },
     },
-  },
-  tenderly: {
-    username: "tenex-finance",
-    project: "v1",
-    privateVerification: false,
   },
   paths: {
     sources: "./contracts",
