@@ -28,7 +28,7 @@ jobs:
       - name: Run tests
         run: OUTPUT_FILENAME=ci.json CONSTANTS_FILENAME=Optimism.json forge test -vvv
         env:
-          BLAST_RPC_URL: ${{ secrets.BLAST_RPC_URL }}
+          BLAST_RPC_URL: ${{ secrets.BSC_RPC_URL }}
           PRIVATE_KEY_DEPLOY: ${{ secrets.PRIVATE_KEY_DEPLOY }}
           
       - name: slither-static-analysis
