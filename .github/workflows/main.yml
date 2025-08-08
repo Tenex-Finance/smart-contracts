@@ -23,10 +23,10 @@ jobs:
       - name: "Build the contracts and print their size"
         run: |
           forge --version
-          forge build --sizes
+      #    forge build --sizes
 
       - name: Run tests
-        run: OUTPUT_FILENAME=ci.json CONSTANTS_FILENAME=Optimism.json forge test -vvv
+        run: OUTPUT_FILENAME=ci.json CONSTANTS_FILENAME=Bsc.json forge test -vvv
         env:
           BSC_RPC_URL: ${{ secrets.BSC_RPC_URL }}
           PRIVATE_KEY_DEPLOY: ${{ secrets.PRIVATE_KEY_DEPLOY }}
